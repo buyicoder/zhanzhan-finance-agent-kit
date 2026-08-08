@@ -1,0 +1,17 @@
+tenant_id: demo-company
+sources:
+  - name: 财务文件归档群
+    chat_id: oc_replace_with_real_chat_id
+    archive_folder_token: replace_with_folder_token
+    enabled: true
+data_model:
+  mode: hybrid
+  base_token: replace_with_base_token
+notifications:
+  completed: []
+  needs_review:
+    - ou_replace_with_reviewer_open_id
+  failed:
+    - ou_replace_with_operator_open_id
+history_backfill: false
+

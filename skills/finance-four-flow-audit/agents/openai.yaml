@@ -1,0 +1,4 @@
+interface:
+  display_name: "财务四流一致审核"
+  short_description: "让Agent独立从原件提取稳定事实并建立可审计四流关系"
+  default_prompt: "使用 $finance-four-flow-audit，隔离旧分类和旧匹配答案，逐文件视觉分析原件，提取稳定业务事实，以反证和硬约束判断关系，写入独立实验表并完成 fresh-read、幂等、人工字段保护和可回滚验证。"

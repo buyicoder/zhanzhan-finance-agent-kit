@@ -1,0 +1,42 @@
+{
+  "object": {
+    "token": "source-token",
+    "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "source": "authorized source",
+    "lineage": []
+  },
+  "observations": [
+    {"page": 1, "mode": "visual", "statement": "Visible party names and document title"}
+  ],
+  "hypotheses": [
+    {"claim": "The file may evidence a signed purchase contract", "falsifiers": ["missing counterparty stamp", "party mismatch"]}
+  ],
+  "facts": [
+    {
+      "fact_id": "FACT|stable-id",
+      "fact_type": "contract",
+      "identity_status": "resolved",
+      "identity_basis": ["contract_number", "parties"],
+      "fields": {
+        "contract_number": {"value": "C-001", "source_token": "source-token", "page": 1, "mode": "visual", "confidence": "high", "conflict": null}
+      },
+      "evidence_tokens": ["source-token"]
+    }
+  ],
+  "relations": [
+    {
+      "from_fact_id": "FACT|stable-id",
+      "to_fact_id": "FLOW|candidate-id",
+      "relation_type": "contract_to_payment",
+      "status": "candidate",
+      "hard_gates": {"party": "pass", "direction": "pass", "project": "unknown", "time": "pass", "amount_pool": "unknown"},
+      "counterevidence": ["No allocation statement"],
+      "reason": "Parties and direction fit; allocation remains missing"
+    }
+  ],
+  "action_plan": [
+    {"target_table": "contracts", "action": "upsert", "fact_ids": ["FACT|stable-id"]}
+  ],
+  "next_evidence_requests": ["payment allocation statement"],
+  "derived_index": {"primary_type": "contract", "shortcuts": ["company/project/contracts"]}
+}

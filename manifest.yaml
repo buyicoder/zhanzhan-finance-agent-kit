@@ -1,0 +1,31 @@
+project: zhanzhan-finance-agent-kit
+version: 0.1.0
+language: zh-CN
+entrypoint: AGENT-ONBOARDING.md
+deployment_model: agent-guided
+supported_harnesses:
+  - generic-feishu-capable-agent
+  - feishu-aily
+required_capabilities:
+  - group_message_read
+  - message_resource_download
+  - drive_read_write
+  - base_schema_read
+  - base_controlled_write
+  - wiki_create_update
+  - image_vision
+  - pdf_render
+hard_gates:
+  - capability_audit
+  - tenant_confirmation
+  - schema_mapping_confirmation
+  - human_field_protection
+  - single_file_readonly_canary
+  - controlled_write_canary
+  - idempotency_verification
+  - production_approval
+reference_implementation:
+  name: 占占四流一致索引中心（AI直做）
+  path: reference-implementation
+  policy: semantic-reference-not-hardcoded-schema
+

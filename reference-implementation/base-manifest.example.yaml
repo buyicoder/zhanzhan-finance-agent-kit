@@ -1,0 +1,33 @@
+name: 占占四流一致索引中心（AI直做）
+status: reference
+layers:
+  file_index:
+    tables: [文件索引]
+    row_grain: one_file_object
+  professional_collections:
+    tables: [单笔回单, 发票, 合同, 货物流凭证]
+    row_grain: one_professional_object
+  business_facts:
+    tables: [银行流水, 项目, 项目流水汇总, 独立履约事实]
+    row_grain: one_deduplicated_business_fact
+  audits:
+    tables: [合同收付款审核, 四流一致审核, 待人工确认]
+    row_grain: one_review_object
+operations:
+  tables: [处理运行记录]
+views_expected:
+  - 总览
+  - 按公司
+  - 缺合同
+  - 缺发票
+  - 缺货物流
+  - 待审核
+  - 冲突
+  - 人工待办
+field_policy:
+  preserve_original_evidence: true
+  protect_human_fields: true
+  require_stable_business_keys: true
+  require_fresh_read: true
+  require_idempotency_replay: true
+
