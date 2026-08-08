@@ -9,5 +9,6 @@
 3. 业务事实：一行代表去重后的流水、履约或项目事实。
 4. 审核结果：一行代表合同付款节点或四流关系的审核对象。
 
-`base-manifest.example.yaml` 提供公开的脱敏语义清单。客户真实 token、table_id、field_id、人员和数据不得提交到公共仓库。
+`base-manifest.example.yaml` 提供分层语义清单，`schema-snapshot.yaml` 提供从现有成熟 Base 导出的13张表、321个字段、选项、描述和关联目标，`view-snapshot.yaml` 保存视图筛选、排序、分组和字段显隐。客户真实 token、table_id、field_id、view_id、人员和业务记录不得提交到公共仓库。
 
+字段快照不是客户必须复制的唯一结构。Agent 应根据行粒度和字段语义做映射，并由客户决定标准新建、现有适配或混合补全。

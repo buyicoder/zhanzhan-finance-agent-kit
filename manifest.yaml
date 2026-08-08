@@ -1,5 +1,5 @@
 project: zhanzhan-finance-agent-kit
-version: 0.1.0
+version: 0.2.0
 language: zh-CN
 entrypoint: AGENT-ONBOARDING.md
 deployment_model: agent-guided
@@ -24,8 +24,16 @@ hard_gates:
   - controlled_write_canary
   - idempotency_verification
   - production_approval
+onboarding_stages:
+  - onboarding/01-capability-audit.md
+  - onboarding/02-tenant-discovery.md
+  - onboarding/03-schema-adaptation.md
+  - onboarding/04-wiki-bootstrap.md
+  - onboarding/05-listener-and-routing.md
+  - onboarding/06-readonly-canary.md
+  - onboarding/07-controlled-write-canary.md
+  - onboarding/08-production-readiness.md
 reference_implementation:
   name: 占占四流一致索引中心（AI直做）
   path: reference-implementation
   policy: semantic-reference-not-hardcoded-schema
-

@@ -1,0 +1,2281 @@
+name: 占占四流一致索引中心（AI直做）
+snapshot_kind: sanitized-semantic-reference
+source_fetched_at: '2026-08-07T11:23:15.429Z'
+table_count: 13
+tables:
+- name: 文件索引
+  field_count: 22
+  fields:
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    description: 原件内容哈希，用于跨来源幂等去重
+    name: 内容SHA256
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 文件名
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目线索
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 父目录Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 交易对象线索
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 扩展名
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 标签依据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 派生对象明细类型
+    options:
+    - name: 单笔银行回单
+    - name: 合同/协议
+    - name: 中标/成交通知
+    - name: 结算审计/进度款
+    - name: 验收报告/验收单
+    - name: 签收单/送货单
+    - name: 开箱/到货资料
+    - name: 交付清单/完工资料
+    - name: 产品检测/认证
+    - name: 项目技术资料
+    - name: 非财务程序文件
+    - name: 安全测试文件
+    - name: 其它派生资料
+    type: select
+  - bidirectional: true
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 文件类型
+    options:
+    - name: docx
+    - name: file
+    - name: sheet
+    - name: 合同
+    - name: 银行回单
+    - name: 银行回单
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 初步标签
+    options:
+    - name: 待内容分析
+    - name: 发票
+    - name: 非财务/技术文件
+    - name: 合同
+    - name: 货物流凭证
+    - name: 银行回单
+    - name: 银行流水
+    - name: 已签购销合同
+    type: select
+  - default_value: null
+    name: 父对象线索
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 原始文件进入业务来源的真实时间：群消息取消息发送时间，云盘文件取对象创建/上传时间；派生对象继承其直接来源时间并在证据中注明。不得用Agent处理时间、Base记录创建时间或文件名日期代替。
+    name: 上传日期
+    style:
+      format: yyyy-MM-dd HH:mm
+    type: datetime
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 分析状态
+    options:
+    - name: 待内容分析
+    - name: 待详细提取
+    - name: 已初步识别
+    - name: 详细分析/字段不完整
+    - name: 已详细分析
+    - name: 已完成
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 对象角色
+    options:
+    - name: 派生对象
+    - name: 原始对象
+    - name: 原件
+    type: select
+  - default_value: null
+    name: 原始路径
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 单笔回单
+    type: link
+    link_table_name: 单笔回单
+  - default_value: null
+    name: 文件Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 备注
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 文件链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    description: 保留同一内容对应的真实群消息和归档事件来源，不重复计算业务事实
+    name: 来源事件集合
+    style:
+      type: plain
+    type: text
+- name: 银行流水
+  field_count: 25
+  fields:
+  - default_value: null
+    name: 对方账号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 交易时间
+    style:
+      format: yyyy-MM-dd HH:mm
+    type: datetime
+  - bidirectional: false
+    description: 真实候选合同；不得当作确认关系。
+    name: 候选合同
+    type: link
+    link_table_name: 合同收付款审核
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 开户行
+    options:
+    - name: 江西银行
+    - name: 中国工商银行
+    - name: 中国建设银行
+    - name: 中信银行
+    type: select
+  - default_value: null
+    name: 来源文件Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 摘要用途
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 提取证据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 主体、方向、回单备注、项目、日期、金额和累计池的人工复核说明。
+    name: 合同匹配说明
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 流水唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 系统精确匹配结论，不替代人工审核。
+    multiple: false
+    name: 合同匹配结论
+    options:
+    - name: 已确认
+    - name: 候选待审
+    - name: 确认+候选
+    - name: 未找到直接合同
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 收支方向
+    options:
+    - name: 收入
+    - name: 支出
+    - name: 待确认
+    type: select
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - bidirectional: true
+    name: 项目汇总
+    type: link
+    link_table_name: 项目流水汇总
+  - default_value: null
+    name: 金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 项目
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 来源回单
+    type: link
+    link_table_name: 单笔回单
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 待四流关联
+    - name: 回单反推/待四流关联
+    - name: 回单反推/字段待补充
+    type: select
+  - default_value: null
+    name: 银行账号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 来源链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    description: 标准化交易对象单选；银行流水与四流审核共用同名选项，便于筛选和分组。
+    multiple: false
+    name: 交易对象
+    options:
+    - name: 丁坤
+    - name: 万寅飞
+    - name: 上海凌周电子科技发展有限公司
+    - name: 上饶县亮点灯饰经营部
+    - name: 上饶天视通科技有限公司
+    - name: 上饶市万事通建材有限公司
+    - name: 上饶市产权经纪服务有限公司
+    - name: 上饶市信州区华翔网络配件经营部
+    - name: 上饶市信州区裕福吊顶建材总汇
+    - name: 上饶市创新虹力科技有限公司
+    - name: 上饶市坤强贸易有限公司
+    - name: 上饶市天宏电力工程有限公司
+    - name: 上饶市宏昌建材有限公司
+    - name: 上饶市宏涵物业服务有限公司
+    - name: 上饶市广信区教育体育局
+    - name: 上饶市延坤钢材销售有限公司
+    - name: 上饶市忠强建材有限公司
+    - name: 上饶市新清高装饰工程有限公司
+    - name: 上饶市智琛建材有限公司
+    - name: 上饶市派利蒙家私有限公司
+    - name: 上饶市瑞鑫家电有限公司
+    - name: 上饶市百进钢材销售有限公司
+    - name: 上饶市第二十一中学
+    - name: 上饶市蓝锐数码科技有限公司
+    - name: 上饶市闪优贸易有限公司
+    - name: 上饶市闽隆建材有限公司
+    - name: 上饶森浅深装饰材料中心
+    - name: 中国工商银行股份有限公司江西省分行集中支付专户
+    - name: 中国电信股份有限公司上饶分公司
+    - name: 中国移动通信集团江西有限公司上饶分公司
+    - name: 中国联合网络通信有限公司上饶市分公司
+    - name: 中国联合网络通信有限公司江西省分公司
+    - name: 中移建设有限公司江西分公司
+    - name: 任丘市聚宝门业有限公司
+    - name: 企知佳（江西）科技集团有限公司
+    - name: 余怀火
+    - name: 佛山市博诚空间家具有限公司
+    - name: 佛山市顺德区美妮西家具有限公司
+    - name: 保证金退款账号
+    - name: 信丰六一节能科技有限公司
+    - name: 信州区乐米灯饰店
+    - name: 信州区佑杨汽车维修店
+    - name: 信州区理航家居店
+    - name: 信州区联达玉祥麟石业经营部
+    - name: 信州区雀友全自动麻将机经营部
+    - name: 其他应付款-企业电子银行类业务工本
+    - name: 刘冬华
+    - name: 刘勇攀
+    - name: 刘小华
+    - name: 刘文灏
+    remaining_options_count: 153
+    type: select
+  - bidirectional: false
+    description: 仅存放经主体、方向、项目/备注、日期和金额节点复核后确认的合同。
+    name: 确认关联合同
+    type: link
+    link_table_name: 合同收付款审核
+  - default_value: null
+    name: 余额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 账户名
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    description: 兼容全集：同时包含确认和候选。审核请分别查看‘确认关联合同’和‘候选合同’，不得把本字段单独视为确认。
+    name: 合同关联全集（兼容）
+    type: link
+    link_table_name: 合同收付款审核
+- name: 单笔回单
+  field_count: 21
+  fields:
+  - default_value: null
+    name: 金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 回单号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 切割文件链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 切割状态
+    options:
+    - name: 已通过/5切割校验并上传
+    type: select
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 银行
+    options:
+    - name: 江西银行
+    - name: 中国工商银行
+    - name: 中国建设银行
+    - name: 中信银行
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 币种
+    options:
+    - name: CNY
+    - name: USD
+    - name: EUR
+    - name: 待确认
+    type: select
+  - default_value: null
+    name: 回单唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 已提取
+    - name: 字段不完整待确认
+    type: select
+  - default_value: null
+    name: 收款账号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 用途摘要
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 反推流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 付款方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 交易时间
+    style:
+      format: yyyy-MM-dd HH:mm
+    type: datetime
+  - default_value: null
+    name: 项目
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 提取证据
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 来源文件索引
+    type: link
+    link_table_name: 文件索引
+  - default_value: null
+    name: 原回单文件Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 付款账号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 收款方
+    style:
+      type: plain
+    type: text
+- name: 发票
+  field_count: 22
+  fields:
+  - default_value: null
+    name: 不含税金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    multiple: false
+    name: 四流可用性
+    options:
+    - name: 可作为本公司发票凭证
+    - name: 仅作为项目链佐证
+    - name: 主体待确认
+    type: select
+  - default_value: null
+    multiple: false
+    name: 流水匹配状态
+    options:
+    - name: 已关联
+    - name: 有候选/金额不一致
+    - name: 未找到对应流水
+    - name: 不适用/项目链佐证
+    type: select
+  - default_value: null
+    name: 销售方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 购买方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目或品名
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 价税合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    multiple: false
+    name: 发票业务角色
+    options:
+    - name: 本公司进项
+    - name: 本公司销项
+    - name: 项目链外部发票
+    - name: 主体待确认
+    type: select
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    name: 来源文件Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 来源链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 已提取
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 发票类型
+    options:
+    - name: 电子发票
+    - name: 增值税专用发票
+    type: select
+  - default_value: null
+    description: 说明已关联、候选差异或未找到流水的原因
+    name: 流水匹配说明
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 开票日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    name: 税额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 提取证据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 发票唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 购买方税号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 销售方税号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 发票号码
+    style:
+      type: plain
+    type: text
+- name: 合同
+  field_count: 30
+  fields:
+  - default_value: null
+    name: 合同金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 以合同签署页/盖章页视觉核验为准；仅双方均见有效印章时才可作为已签署合同参与自动唯一匹配
+    multiple: false
+    name: 双章视觉状态
+    options:
+    - name: 待视觉核验
+    - name: 双方已盖章
+    - name: 仅甲方章
+    - name: 仅乙方章
+    - name: 未见印章
+    - name: 无法判断
+    - name: 非签署版/模板
+    type: select
+  - bidirectional: true
+    name: 合同收付款审核
+    type: link
+    link_table_name: 合同收付款审核
+  - default_value: null
+    name: 付款条款
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 合同唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 结构化状态
+    options:
+    - name: 已视觉核验
+    - name: 非合同附件
+    - name: 模板或未签署
+    - name: 视觉证据不足
+    type: select
+  - default_value: null
+    name: 其他方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 乙方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 标的或内容
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 合同编号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 本公司角色
+    style:
+      type: plain
+    type: text
+  - description: 视觉检查签署页后确认可见乙方印章
+    name: 乙方章视觉确认
+    type: checkbox
+  - default_value: null
+    name: 来源文件Token
+    style:
+      type: plain
+    type: text
+  - description: 视觉检查签署页后确认可见甲方印章
+    name: 甲方章视觉确认
+    type: checkbox
+  - default_value: null
+    description: 记录核验页码、印章主体、清晰度及异常；不以OCR关键词替代视觉判断
+    name: 盖章核验说明
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 版本组
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 签订日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - bidirectional: false
+    name: 拆分子合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    name: 提取证据
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 项目汇总
+    type: link
+    link_table_name: 项目流水汇总
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 来源链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    name: 履约期限
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 合同名称
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 来源文件索引
+    type: link
+    link_table_name: 文件索引
+  - default_value: null
+    name: 甲方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 待人工确认
+    - name: 已提取核心字段
+    type: select
+  - default_value: null
+    name: 交付与验收要求
+    style:
+      type: plain
+    type: text
+- name: 货物流凭证
+  field_count: 27
+  fields:
+  - default_value: null
+    name: 业务日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 系统价值分层字段，不替代人工结论
+    multiple: false
+    name: 履约价值分层
+    options:
+    - name: 可用于四流/明确履约
+    - name: 履约候选/待视觉核验
+    - name: 专业项目资料/非履约
+    - name: 证据不足/待视觉核验
+    type: select
+  - default_value: null
+    name: 签收或验收人
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    description: 系统依据内容SHA证据标记，不代表删除或合并
+    multiple: false
+    name: 内容去重状态
+    options:
+    - name: 存在SHA同内容派生对象
+    - name: 未发现SHA同内容派生对象
+    - name: 未计算
+    type: select
+  - default_value: null
+    description: 系统价值分层字段，不替代人工结论
+    multiple: false
+    name: 凭证阶段
+    options:
+    - name: 发货
+    - name: 到货
+    - name: 签收
+    - name: 安装
+    - name: 试运行
+    - name: 培训
+    - name: 验收
+    - name: 未识别
+    type: select
+  - default_value: null
+    description: 系统视觉核验字段，不替代人工结论
+    name: 履约事实摘要
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 来源文件Token
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 提取证据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 收货方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 凭证唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 提取证据中记录的SHA256同内容派生对象数量
+    name: 同内容派生对象数
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    description: 系统视觉核验字段，不替代人工结论
+    multiple: false
+    name: 签章强度
+    options:
+    - name: 双方单位盖章
+    - name: 多方盖章＋手签
+    - name: 单方盖章
+    - name: 未见签章
+    - name: 多方单位盖章/签字
+    - name: 多方单位盖章/签字
+    type: select
+  - default_value: null
+    name: 凭证编号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 系统视觉核验字段，不替代人工结论
+    multiple: false
+    name: 视觉核验状态
+    options:
+    - name: 已核验明确履约
+    - name: 已核验非履约
+    - name: 视觉证据不足
+    type: select
+  - default_value: null
+    description: 系统去重证据，不替代人工结论
+    name: 去重依据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 数量
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    name: 项目
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 发货方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 待详细内容抽取
+    - name: 字段不完整待确认
+    - name: 已提取核心字段
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 凭证类型
+    options:
+    - name: 到货凭证
+    - name: 发货/出库凭证
+    - name: 签收凭证
+    - name: 验收凭证
+    - name: 移交/交付凭证
+    type: select
+  - default_value: null
+    name: 来源链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    description: 系统价值分层字段，不替代人工结论
+    multiple: false
+    name: 四流可用性
+    options:
+    - name: 可作为履约候选
+    - name: 暂不可用于四流
+    - name: 非履约资料
+    type: select
+  - default_value: null
+    name: 货物或服务
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 承运方
+    style:
+      type: plain
+    type: text
+- name: 项目
+  field_count: 25
+  fields:
+  - bidirectional: false
+    name: 关联审核流水
+    type: link
+    link_table_name: 四流一致审核
+  - default_value: null
+    name: 项目唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 标准项目名称的推理依据和来源表
+    name: 项目判断依据
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    description: 系统用于关联非合同/非发票但可佐证付款节点、结算、审批缺失搜索范围等的文件索引表项。
+    name: 关联佐证文件
+    type: link
+    link_table_name: 文件索引
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 项目状态
+    options:
+    - name: 待确认
+    - name: 进行中
+    - name: 已完成
+    - name: 已终止
+    type: select
+  - default_value: null
+    name: 开始日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    name: 供应商
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    name: 结束日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 客户或业主
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 证据Token集合
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 成本支出合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 基于当前已关联流水自动形成的候选判断，不替代人工财务结论
+    name: 系统经营判断
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 流水笔数
+    style:
+      percentage: false
+      precision: 0
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    name: 收入合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 来自流水、回单、合同及货物流的原始项目表达，多个别名用；分隔
+    name: 项目别名集合
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 回款状态
+    options:
+    - name: 收支均有/待核对
+    - name: 仅见收入/成本待归集
+    - name: 仅见支出/未见回款
+    - name: 暂无流水
+    type: select
+  - default_value: null
+    name: 合同编号
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目净额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: false
+    name: 关联流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 合同金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 审核备注
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目名称
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 归集置信度
+    options:
+    - name: 高
+    - name: 中
+    - name: 低
+    - name: 待确认
+    type: select
+- name: 四流一致审核
+  field_count: 36
+  fields:
+  - default_value: null
+    description: 区分采购销售、银行手续费、银行利息、税费、工资社保、内部往来、退款冲正与贷款还款，以判断收支和三流适用性
+    multiple: false
+    name: 业务类型
+    options:
+    - name: 银行手续费
+    - name: 银行利息
+    - name: 采购/销售
+    - name: 税费
+    - name: 工资/社保
+    - name: 内部往来
+    - name: 退款/冲正
+    - name: 贷款/还款
+    - name: 其它/待确认
+    type: select
+  - default_value: null
+    name: 发票记录ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 区分已关联、有文件待匹配、确认缺失、业务不适用和多候选
+    multiple: false
+    name: 货物流状态
+    options:
+    - name: 已关联
+    - name: 有文件待匹配
+    - name: 待判定（尚未匹配）
+    - name: 确认缺失
+    - name: 业务不适用
+    - name: 多候选待确认
+    - name: 缺失
+    - name: 缺失（货物流凭证尚在分析）
+    - name: 证据不足
+    - name: 已关联候选
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 收支方向
+    options:
+    - name: 收入
+    - name: 支出
+    - name: 待确认
+    type: select
+  - default_value: null
+    name: 回单记录ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计。新增确认缺失/业务不适用用于区分未上传回单与本来无独立回单场景。
+    multiple: false
+    name: 回单状态
+    options:
+    - name: 待确认（多候选）
+    - name: 缺失
+    - name: 确认缺失
+    - name: 业务不适用
+    - name: 已关联
+    type: select
+  - default_value: null
+    description: 系统字段：当购销三流为业务不适用时，说明仍需补充/核验的非购销凭证类型，避免误解为免审。
+    multiple: false
+    name: 应补非购销证据分类
+    options:
+    - name: 工资/薪资/社保资料
+    - name: 报销明细/费用票据
+    - name: 税费缴款资料
+    - name: 内部往来/同主体划转资料
+    - name: 贷款/融资资料
+    - name: 保证金/押金资料
+    - name: 银行手续费凭证
+    - name: 银行利息/结息凭证
+    - name: 退款/冲正资料
+    - name: 其它非购销待说明
+    type: select
+  - default_value: null
+    description: 系统基于流水、回单、合同及退款证据的风险核验状态
+    multiple: false
+    name: 风险核验状态
+    options:
+    - name: 真实多笔/待业务核验
+    - name: 疑似对象重复/需去重
+    - name: 存在退款/冲正证据
+    type: select
+  - default_value: null
+    name: 待处理事项
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 合同记录ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 流水记录ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 标准化交易对象单选；银行流水与四流审核共用同名选项，便于筛选和分组。
+    multiple: false
+    name: 交易对象
+    options:
+    - name: 丁坤
+    - name: 万寅飞
+    - name: 上海凌周电子科技发展有限公司
+    - name: 上饶县亮点灯饰经营部
+    - name: 上饶天视通科技有限公司
+    - name: 上饶市万事通建材有限公司
+    - name: 上饶市产权经纪服务有限公司
+    - name: 上饶市信州区华翔网络配件经营部
+    - name: 上饶市信州区裕福吊顶建材总汇
+    - name: 上饶市创新虹力科技有限公司
+    - name: 上饶市坤强贸易有限公司
+    - name: 上饶市天宏电力工程有限公司
+    - name: 上饶市宏昌建材有限公司
+    - name: 上饶市宏涵物业服务有限公司
+    - name: 上饶市广信区教育体育局
+    - name: 上饶市延坤钢材销售有限公司
+    - name: 上饶市忠强建材有限公司
+    - name: 上饶市新清高装饰工程有限公司
+    - name: 上饶市智琛建材有限公司
+    - name: 上饶市派利蒙家私有限公司
+    - name: 上饶市瑞鑫家电有限公司
+    - name: 上饶市百进钢材销售有限公司
+    - name: 上饶市第二十一中学
+    - name: 上饶市蓝锐数码科技有限公司
+    - name: 上饶市闪优贸易有限公司
+    - name: 上饶市闽隆建材有限公司
+    - name: 上饶森浅深装饰材料中心
+    - name: 中国工商银行股份有限公司江西省分行集中支付专户
+    - name: 中国电信股份有限公司上饶分公司
+    - name: 中国移动通信集团江西有限公司上饶分公司
+    - name: 中国联合网络通信有限公司上饶市分公司
+    - name: 中国联合网络通信有限公司江西省分公司
+    - name: 中移建设有限公司江西分公司
+    - name: 任丘市聚宝门业有限公司
+    - name: 企知佳（江西）科技集团有限公司
+    - name: 余怀火
+    - name: 佛山市博诚空间家具有限公司
+    - name: 佛山市顺德区美妮西家具有限公司
+    - name: 保证金退款账号
+    - name: 信丰六一节能科技有限公司
+    - name: 信州区乐米灯饰店
+    - name: 信州区佑杨汽车维修店
+    - name: 信州区理航家居店
+    - name: 信州区联达玉祥麟石业经营部
+    - name: 信州区雀友全自动麻将机经营部
+    - name: 其他应付款-企业电子银行类业务工本
+    - name: 刘冬华
+    - name: 刘勇攀
+    - name: 刘小华
+    - name: 刘文灏
+    remaining_options_count: 143
+    type: select
+  - default_value: null
+    description: 系统基于跨流水证据形成的候选判断，不替代人工结论
+    name: 系统风险判断
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 流水金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 四流审核结论，区分通过、业务不适用、待匹配和资料缺失
+    multiple: false
+    name: 总体结论
+    options:
+    - name: 四流一致/通过
+    - name: 业务不适用/凭证链合理
+    - name: 存在资料待匹配
+    - name: 资料不完整/待审核
+    - name: 多候选待确认
+    type: select
+  - bidirectional: false
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    name: 流水时间
+    style:
+      format: yyyy-MM-dd HH:mm
+    type: datetime
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    description: 区分已关联、有文件待匹配、确认缺失、业务不适用和多候选
+    multiple: false
+    name: 发票状态
+    options:
+    - name: 已关联
+    - name: 有文件待匹配
+    - name: 待判定（尚未匹配）
+    - name: 确认缺失
+    - name: 业务不适用
+    - name: 多候选待确认
+    - name: 缺失
+    - name: 证据不足
+    type: select
+  - default_value: null
+    name: 匹配依据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 解释发票、合同、货物流凭证是缺失、待匹配还是业务本身不适用
+    name: 三流适用性说明
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    name: 关联回单
+    type: link
+    link_table_name: 单笔回单
+  - bidirectional: false
+    name: 关联发票
+    type: link
+    link_table_name: 发票
+  - bidirectional: false
+    name: 关联货物流
+    type: link
+    link_table_name: 货物流凭证
+  - bidirectional: true
+    name: 项目汇总
+    type: link
+    link_table_name: 项目流水汇总
+  - default_value: null
+    description: 系统风险提示，不替代人工审核结论
+    multiple: false
+    name: 风险标签
+    options:
+    - name: 重复付款候选
+    - name: 资料缺口
+    - name: 待人工复核
+    type: select
+  - default_value: null
+    name: 审核唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 列出合同、发票、货物流候选数量、匹配依据及待确认事项
+    name: 候选说明
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    description: 人工填写最终审核意见或选择候选的原因
+    name: 审核意见
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    name: 关联流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    description: 区分已关联、有文件待匹配、确认缺失、业务不适用和多候选
+    multiple: false
+    name: 合同状态
+    options:
+    - name: 已关联
+    - name: 有文件待匹配
+    - name: 待判定（尚未匹配）
+    - name: 确认缺失
+    - name: 业务不适用
+    - name: 多候选待确认
+    - name: 缺失
+    - name: 证据不足
+    type: select
+  - default_value: null
+    description: 人工确认四流候选关系
+    multiple: false
+    name: 人工审核状态
+    options:
+    - name: 待审核
+    - name: 已确认
+    - name: 需补资料
+    - name: 不适用已确认
+    - name: 已驳回候选
+    type: select
+  - bidirectional: false
+    description: 系统用于关联非合同/非发票但可佐证付款节点、结算、审批缺失搜索范围等的文件索引表项。
+    name: 关联佐证文件
+    type: link
+    link_table_name: 文件索引
+  - default_value: null
+    name: 货物流记录ID
+    style:
+      type: plain
+    type: text
+- name: 合同收付款审核
+  field_count: 61
+  fields:
+  - default_value: null
+    description: 合同另一方/外部项目链当事人组合单选；组合名称表示合同存在多个非本公司当事人。
+    multiple: false
+    name: 合同对方
+    options:
+    - name: 上饶中学；建投物联股份有限公司
+    - name: 上饶天视通科技有限公司
+    - name: 上饶市创新虹力科技有限公司
+    - name: 上饶市广信区教育体育局；中国移动通信集团江西有限公司上饶分公司
+    - name: 上饶市广信区电化教育教学仪器站；江西奇斗科技有限公司
+    - name: 上饶市广信区第八中学；江西联硕科技有限公司
+    - name: 上饶市恒志机械设备有限公司
+    - name: 上饶市滨成投资有限公司
+    - name: 上饶市滨成投资有限公司；江西奇斗科技有限公司
+    - name: 上饶市闪优贸易有限公司；南昌海康威视数字技术有限公司
+    - name: 上饶市闽隆建材有限公司
+    - name: 上饶师范学院；江西奇斗科技有限公司
+    - name: 中国移动通信集团江西有限公司上饶分公司
+    - name: 中国移动通信集团江西有限公司上饶分公司；江西奇斗科技有限公司
+    - name: 中国联合网络通信有限公司上饶市分公司
+    - name: 中移建设有限公司江西分公司
+    - name: 中移建设有限公司江西分公司；江西奇斗科技有限公司
+    - name: 信丰六一节能科技有限公司
+    - name: 信丰县六一节能科技有限公司
+    - name: 南昌上勤科技有限公司
+    - name: 南昌市深鸿科技有限公司
+    - name: 南昌海康威视数字技术有限公司
+    - name: 国泰新点软件股份有限公司
+    - name: 安安（深圳）智能电子有限公司
+    - name: 广铭科技发展（泉州市）有限公司
+    - name: 成都佳发安泰教育科技股份有限公司
+    - name: 江西北博科技有限公司；江西联硕科技有限公司
+    - name: 江西医学高等专科学校
+    - name: 江西医学高等专科学校；上饶市闪优贸易有限公司
+    - name: 江西升派科技有限公司
+    - name: 江西华晨信息科技有限公司
+    - name: 江西国好科技实业有限公司
+    - name: 江西奇斗科技有限公司；上饶市创新虹力科技有限公司
+    - name: 江西奇斗科技有限公司；上饶市天宏电力工程有限公司
+    - name: 江西奇斗科技有限公司；国泰新点软件股份有限公司
+    - name: 江西奇斗科技有限公司；广东保伦电子股份有限公司
+    - name: 江西奇斗科技有限公司；广州市迪士普音响科技有限公司
+    - name: 江西奇斗科技有限公司；江方秀康科技有限公司
+    - name: 江西奇斗科技有限公司；江西国资信赢信息科技有限公司
+    - name: 江西奇斗科技有限公司；江西智绘云技术有限公司
+    - name: 江西奇斗科技有限公司；江西省沈田通信线缆有限公司
+    - name: 江西奇斗科技有限公司；江西秀康科技有限公司
+    - name: 江西奇斗科技有限公司；江西联硕科技有限公司
+    - name: 江西奇斗科技有限公司；江西锐丰音响有限公司
+    - name: 江西广臻文化有限公司
+    - name: 江西欧纳信息科技有限公司
+    - name: 江西省上饶市广信中学；中国移动通信集团江西有限公司上饶分公司
+    - name: 江西秀康科技有限公司
+    - name: 江西联硕科技有限公司
+    - name: 江西葵盛科技有限公司
+    remaining_options_count: 8
+    type: select
+  - default_value: null
+    name: 第1笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    name: 第4笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    name: 合同编号
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第2笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    description: 逐合同说明主体、金额、日期、摘要/回单备注和项目链判断
+    name: 匹配判断
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 第3期应收金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 合同正文中的付款触发条件
+    name: 第1期应收条件
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 人工审核状态
+    options:
+    - name: 待审核
+    - name: 已确认
+    - name: 需调整
+    type: select
+  - default_value: null
+    name: 第6笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 签订日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    name: 第5笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - bidirectional: false
+    description: 重复扫描/版本只关联主审核行，不参与合同金额和流水匹配
+    name: 合并至主记录
+    type: link
+    link_table_name: 合同收付款审核
+  - default_value: null
+    description: 独立合同事实级唯一键；重复扫描版本只保留一个审核行
+    name: 合同资金审核键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 付款条款
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 质保尾款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: false
+    description: 关联项目主表
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    multiple: false
+    name: 回款状态
+    options:
+    - name: 已结清
+    - name: 未结算（未到期）
+    - name: 部分回款（未到期）
+    - name: 逾期未结算/应催收
+    - name: 部分逾期/应催收
+    - name: 多候选待审
+    - name: 未找到流水
+    - name: 非收款合同/不适用
+    - name: 尚未形成应收
+    type: select
+  - default_value: null
+    description: 合同金额减已确认回款；退款冲正需先抵销
+    name: 未结算金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 第3笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 付款合同结算状态；候选链接不等于确认付款
+    multiple: false
+    name: 付款状态
+    options:
+    - name: 已付清
+    - name: 部分付款
+    - name: 未找到付款
+    - name: 多候选待审
+    - name: 未到付款日
+    - name: 非金额协议/不适用
+    - name: 重复版本/不参与
+    - name: 非本公司合同/不适用
+    type: select
+  - default_value: null
+    name: 第5笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 只有合同事实和履约日期足以计算时才填写
+    name: 第2期应收DDL
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第4笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 第2笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 合同正文中的付款触发条件
+    name: 第4期应收条件
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第1笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 第4期应收金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 第4笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 人工审核意见
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 已回款合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    description: 合同正文中的付款触发条件
+    name: 第3期应收条件
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 交付、验收、试运行、质保期等触发付款的条件
+    name: 履约与到期依据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 第6笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 只有合同事实和履约日期足以计算时才填写
+    name: 第4期应收DDL
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 来自合同版本组/独立事实ID，不按扫描副本重复计数
+    name: 合同事实键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 反向复核结果
+    options:
+    - name: 一致
+    - name: 已纠正旧关系
+    - name: 保留多候选
+    - name: 存在冲突
+    - name: 待复核
+    type: select
+  - default_value: null
+    description: 合同正文中的付款触发条件
+    name: 第2期应收条件
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 第1笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: true
+    description: 关联全部同一业务事实的合同版本/来源
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    name: 第2笔回款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第5笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 第2期应收金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 合同金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: true
+    description: 合同反向召回并经主体、方向、摘要、日期、金额人工复核的流水集合
+    name: 全部关联流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    description: 只有合同事实和履约日期足以计算时才填写
+    name: 第3期应收DDL
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    multiple: false
+    name: 合同事实状态
+    options:
+    - name: 主合同事实
+    - name: 重复版本/不参与金额
+    type: select
+  - default_value: null
+    description: 按验收/质保起算事实计算；证据不足时留空并说明
+    name: 质保尾款DDL
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    description: 用于幂等、回验和回滚定位
+    name: 处理批次
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 合同金额减已确认付款；非固定金额协议留空
+    name: 未付款金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 第3笔回款日期
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第3笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    description: 付款合同经人工确认归属的累计付款，不包含候选、退款和其它批次
+    name: 已付款合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 第1期应收金额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: false
+    description: 与已确认或候选流水对应的真实回单表项
+    name: 全部关联回单
+    type: link
+    link_table_name: 单笔回单
+  - default_value: null
+    description: 只有合同事实和履约日期足以计算时才填写
+    name: 第1期应收DDL
+    style:
+      format: yyyy-MM-dd
+    type: datetime
+  - default_value: null
+    multiple: false
+    name: 合同性质
+    options:
+    - name: 收款合同
+    - name: 付款合同
+    - name: 内部购销合同
+    - name: 非本公司合同
+    - name: 待判定
+    type: select
+  - default_value: null
+    name: 合同名称
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    description: 按实际到账时间排序；直接关联银行流水表项
+    name: 第6笔回款流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 异常与催收提示
+    style:
+      type: plain
+    type: text
+- name: 项目流水汇总
+  field_count: 14
+  fields:
+  - bidirectional: true
+    name: 关联审核流水
+    type: link
+    link_table_name: 四流一致审核
+  - default_value: null
+    multiple: false
+    name: 归集状态
+    options:
+    - name: 已归集
+    - name: 多项目候选
+    - name: 待归集
+    - name: 非项目费用
+    type: select
+  - default_value: null
+    name: 项目名称
+    style:
+      type: plain
+    type: text
+  - bidirectional: true
+    name: 关联流水
+    type: link
+    link_table_name: 银行流水
+  - default_value: null
+    name: 归集依据
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 成本支出合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 流水笔数
+    style:
+      percentage: false
+      precision: 0
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 收入合计
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - default_value: null
+    name: 项目归集键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目净额
+    style:
+      currency_code: CNY
+      precision: 2
+      type: currency
+    type: number
+  - bidirectional: false
+    description: 关联项目主表中的标准项目记录
+    name: 标准项目
+    type: link
+    link_table_name: 项目
+  - default_value: null
+    multiple: false
+    name: 审核状态
+    options:
+    - name: 待审核
+    - name: 已确认
+    - name: 需调整
+    type: select
+  - bidirectional: true
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+- name: 待人工确认
+  field_count: 12
+  fields:
+  - default_value: null
+    name: 候选结论
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 不确定原因
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 对象Token或记录ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 优先级
+    options:
+    - name: 高
+    - name: 中
+    - name: 低
+    type: select
+  - default_value: null
+    name: 证据摘要
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 确认类型
+    options:
+    - name: 发票明细待分析
+    - name: 合同读取待处理
+    - name: 回单切割失败
+    - name: 银行流水PDF结构化
+    type: select
+  - default_value: null
+    name: 处理备注
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 处理状态
+    options:
+    - name: 待处理
+    - name: 处理中
+    - name: 已处理
+    type: select
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 公司
+    options:
+    - name: 北博
+    - name: 奥岑
+    - name: 高灿
+    - name: 丰聚
+    - name: 高众
+    - name: 天盾
+    type: select
+  - default_value: null
+    name: 对象链接
+    style:
+      type: url
+    type: text
+  - default_value: null
+    name: 人工结论
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 确认项唯一键
+    style:
+      type: plain
+    type: text
+- name: 处理运行记录
+  field_count: 9
+  fields:
+  - default_value: null
+    name: 已处理数量
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    name: 失败数量
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    name: 范围
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 阶段
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 成功数量
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    description: 枚举字段；由现有真实取值转换，便于筛选、分组与统计
+    multiple: false
+    name: 状态
+    options:
+    - name: 执行中
+    type: select
+  - default_value: null
+    name: 运行唯一键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 检查点
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 说明
+    style:
+      type: plain
+    type: text
+- name: 独立履约事实
+  field_count: 17
+  fields:
+  - default_value: null
+    name: 证据说明
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 货物或服务明细
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 金额
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - bidirectional: false
+    name: 来源货物流记录
+    type: link
+    link_table_name: 货物流凭证
+  - bidirectional: false
+    name: 关联审核流水
+    type: link
+    link_table_name: 四流一致审核
+  - default_value: null
+    name: 公司
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 凭证阶段
+    options:
+    - name: 发货
+    - name: 到货
+    - name: 签收
+    - name: 安装
+    - name: 试运行
+    - name: 培训
+    - name: 验收
+    type: select
+  - default_value: null
+    name: 视觉核验结论
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 发货或服务方
+    style:
+      type: plain
+    type: text
+  - bidirectional: false
+    name: 关联合同
+    type: link
+    link_table_name: 合同
+  - default_value: null
+    name: 数量
+    style:
+      percentage: false
+      precision: 2
+      thousands_separator: false
+      type: plain
+    type: number
+  - default_value: null
+    description: 稳定业务事实键；同内容副本只计一次
+    name: 履约事实ID
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 项目或单据键
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 签章强度
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    name: 收货或验收方
+    style:
+      type: plain
+    type: text
+  - default_value: null
+    multiple: false
+    name: 事实状态
+    options:
+    - name: 视觉已确认
+    - name: 证据不足
+    - name: 人工已确认
+    type: select
+  - default_value: null
+    name: 业务日期
+    style:
+      format: yyyy/MM/dd
+    type: datetime

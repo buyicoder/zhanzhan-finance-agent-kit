@@ -42,7 +42,10 @@ def main() -> None:
         ROOT / "protocols" / "filename-mapping.md",
         ROOT / "protocols" / "controlled-write.md",
         ROOT / "reference-implementation" / "base-manifest.example.yaml",
+        ROOT / "reference-implementation" / "schema-snapshot.yaml",
+        ROOT / "reference-implementation" / "view-snapshot.yaml",
         ROOT / "skills" / "finance-four-flow-audit" / "SKILL.md",
+        ROOT / "skills" / "domain-manuals" / "README.md",
         ROOT / "wiki" / "home-template.md",
     ]
     missing = [str(path.relative_to(ROOT)) for path in required_paths if not path.is_file()]
@@ -57,4 +60,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -15,7 +15,7 @@
 
 ### 0. 读取项目
 
-读取 README、manifest、协议、skills 和标准参考实现。记录项目版本及所有文件哈希。不得只读 README 后开始工作。
+读取 README、manifest、协议、`skills/finance-four-flow-audit/`、`skills/domain-manuals/README.md` 和标准参考实现。记录项目版本及所有文件哈希。不得只读 README 后开始工作。
 
 ### 1. 能力与授权审计
 
@@ -64,4 +64,3 @@
 ## 完成定义
 
 入职完成不是“自动化已启用”，而是：输入来源明确、原件可归档、Agent 能完整读原件、数据模型已适配、人工字段受保护、重复事实受控制、写入可回验、异常能通知、断线能补扫、客户能在 Wiki 中理解和管理系统。
-

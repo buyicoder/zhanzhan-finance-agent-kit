@@ -1,0 +1,3453 @@
+name: 占占四流一致索引中心（AI直做）
+snapshot_kind: sanitized-view-reference
+tables:
+- table: 文件索引
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 文件名
+    - 上传日期
+    - 公司
+    - 扩展名
+    - 文件链接
+    - 初步标签
+    - 对象角色
+    - 文件类型
+    - 原始路径
+    - 文件Token
+    - 父目录Token
+    - 标签依据
+    - 分析状态
+    - 父对象线索
+    - 项目线索
+    - 交易对象线索
+    - 备注
+    - 单笔回单
+    - 派生对象明细类型
+    - 来源事件集合
+    - 关联合同
+    - 内容SHA256
+  - name: 文件审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: false
+      field: 文件名
+    group: []
+    visible_fields:
+    - 文件名
+    - 备注
+    - 分析状态
+    - 单笔回单
+    - 文件链接
+    - 项目线索
+    - 公司
+    - 原始路径
+    - 文件Token
+    - 初步标签
+    - 交易对象线索
+    - 文件类型
+    - 对象角色
+    - 上传日期
+    - 来源事件集合
+    - 关联合同
+    - 内容SHA256
+  - name: 已关联回单
+    type: grid
+    filter:
+      conditions:
+      - - 单笔回单
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: false
+      field: 文件名
+    group: []
+    visible_fields:
+    - 文件名
+    - 文件类型
+    - 公司
+    - 项目线索
+    - 原始路径
+    - 单笔回单
+    - 初步标签
+    - 分析状态
+    - 对象角色
+    - 交易对象线索
+    - 文件链接
+    - 文件Token
+    - 备注
+    - 上传日期
+    - 来源事件集合
+    - 关联合同
+    - 内容SHA256
+  - name: 最新文件
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 上传日期
+    group: []
+    visible_fields:
+    - 文件名
+    - 公司
+    - 上传日期
+    - 对象角色
+    - 文件类型
+    - 扩展名
+    - 原始路径
+    - 文件链接
+    - 文件Token
+    - 父目录Token
+    - 初步标签
+    - 标签依据
+    - 分析状态
+    - 父对象线索
+    - 项目线索
+    - 交易对象线索
+    - 备注
+    - 单笔回单
+    - 派生对象明细类型
+    - 来源事件集合
+    - 关联合同
+    - 内容SHA256
+- table: 银行流水
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 公司
+    - 账户名
+    - 银行账号
+    - 开户行
+    - 交易时间
+    - 收支方向
+    - 金额
+    - 余额
+    - 交易对象
+    - 对方账号
+    - 摘要用途
+    - 项目
+    - 来源文件Token
+    - 来源链接
+    - 提取证据
+    - 审核状态
+    - 来源回单
+    - 项目汇总
+    - 标准项目
+    - 合同关联全集（兼容）
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 按项目查看流水
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group:
+    - desc: false
+      field: 公司
+    - desc: false
+      field: 项目
+    visible_fields:
+    - 流水唯一键
+    - 来源链接
+    - 开户行
+    - 余额
+    - 提取证据
+    - 项目
+    - 交易时间
+    - 摘要用途
+    - 账户名
+    - 银行账号
+    - 收支方向
+    - 金额
+    - 审核状态
+    - 对方账号
+    - 项目汇总
+    - 公司
+    - 来源文件Token
+    - 来源回单
+    - 交易对象
+    - 标准项目
+    - 合同关联全集（兼容）
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 流水审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 项目
+    - 银行账号
+    - 开户行
+    - 交易对象
+    - 来源回单
+    - 标准项目
+    - 收支方向
+    - 审核状态
+    - 公司
+    - 合同关联全集（兼容）
+    - 交易时间
+    - 余额
+    - 金额
+    - 来源链接
+    - 摘要用途
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 已关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 合同关联全集（兼容）
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 公司
+    - 审核状态
+    - 来源回单
+    - 余额
+    - 银行账号
+    - 开户行
+    - 合同关联全集（兼容）
+    - 摘要用途
+    - 标准项目
+    - 交易时间
+    - 收支方向
+    - 来源链接
+    - 金额
+    - 交易对象
+    - 项目
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 未关联回单
+    type: grid
+    filter:
+      conditions:
+      - - 来源回单
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 收支方向
+    - 交易时间
+    - 交易对象
+    - 标准项目
+    - 摘要用途
+    - 公司
+    - 来源回单
+    - 余额
+    - 合同关联全集（兼容）
+    - 开户行
+    - 审核状态
+    - 金额
+    - 项目
+    - 银行账号
+    - 来源链接
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 项目
+    - 银行账号
+    - 合同关联全集（兼容）
+    - 交易对象
+    - 公司
+    - 交易时间
+    - 金额
+    - 标准项目
+    - 来源链接
+    - 收支方向
+    - 开户行
+    - 来源回单
+    - 摘要用途
+    - 余额
+    - 审核状态
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 银行账号
+    - 余额
+    - 审核状态
+    - 公司
+    - 交易对象
+    - 项目
+    - 合同关联全集（兼容）
+    - 交易时间
+    - 来源链接
+    - 来源回单
+    - 标准项目
+    - 摘要用途
+    - 开户行
+    - 金额
+    - 收支方向
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 公司
+    - 交易对象
+    - 来源回单
+    - 银行账号
+    - 余额
+    - 项目
+    - 交易时间
+    - 来源链接
+    - 合同关联全集（兼容）
+    - 开户行
+    - 金额
+    - 收支方向
+    - 审核状态
+    - 摘要用途
+    - 标准项目
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 交易对象
+    - 来源链接
+    - 摘要用途
+    - 开户行
+    - 收支方向
+    - 银行账号
+    - 来源回单
+    - 金额
+    - 标准项目
+    - 余额
+    - 项目
+    - 审核状态
+    - 交易时间
+    - 公司
+    - 合同关联全集（兼容）
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 交易对象
+    - 公司
+    - 开户行
+    - 交易时间
+    - 标准项目
+    - 金额
+    - 摘要用途
+    - 合同关联全集（兼容）
+    - 审核状态
+    - 收支方向
+    - 银行账号
+    - 来源回单
+    - 项目
+    - 余额
+    - 来源链接
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 流水唯一键
+    - 来源回单
+    - 项目
+    - 银行账号
+    - 标准项目
+    - 收支方向
+    - 公司
+    - 交易时间
+    - 开户行
+    - 金额
+    - 摘要用途
+    - 交易对象
+    - 审核状态
+    - 合同关联全集（兼容）
+    - 余额
+    - 来源链接
+    - 确认关联合同
+    - 候选合同
+    - 合同匹配结论
+    - 合同匹配说明
+- table: 单笔回单
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 回单唯一键
+    - 公司
+    - 切割文件链接
+    - 银行
+    - 交易时间
+    - 付款方
+    - 付款账号
+    - 收款方
+    - 收款账号
+    - 金额
+    - 币种
+    - 回单号
+    - 用途摘要
+    - 项目
+    - 原回单文件Token
+    - 切割状态
+    - 提取证据
+    - 审核状态
+    - 反推流水
+    - 来源文件索引
+    - 标准项目
+  - name: 回单审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 回单唯一键
+    - 项目
+    - 反推流水
+    - 付款方
+    - 切割状态
+    - 标准项目
+    - 交易时间
+    - 公司
+    - 回单号
+    - 用途摘要
+    - 金额
+    - 银行
+    - 切割文件链接
+    - 收款方
+    - 审核状态
+  - name: 已反推流水
+    type: grid
+    filter:
+      conditions:
+      - - 反推流水
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 回单唯一键
+    - 切割状态
+    - 审核状态
+    - 银行
+    - 收款方
+    - 项目
+    - 付款方
+    - 反推流水
+    - 切割文件链接
+    - 回单号
+    - 交易时间
+    - 公司
+    - 金额
+    - 用途摘要
+    - 标准项目
+  - name: 未反推流水
+    type: grid
+    filter:
+      conditions:
+      - - 反推流水
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 交易时间
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 回单唯一键
+    - 公司
+    - 回单号
+    - 金额
+    - 付款方
+    - 切割文件链接
+    - 反推流水
+    - 用途摘要
+    - 项目
+    - 切割状态
+    - 银行
+    - 标准项目
+    - 交易时间
+    - 收款方
+    - 审核状态
+- table: 发票
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 公司
+    - 来源链接
+    - 发票类型
+    - 发票号码
+    - 开票日期
+    - 销售方
+    - 销售方税号
+    - 购买方
+    - 购买方税号
+    - 不含税金额
+    - 税额
+    - 价税合计
+    - 项目或品名
+    - 来源文件Token
+    - 提取证据
+    - 审核状态
+    - 标准项目
+    - 四流可用性
+    - 发票业务角色
+    - 流水匹配说明
+    - 流水匹配状态
+  - name: 发票审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 价税合计
+    - 不含税金额
+    - 审核状态
+    - 开票日期
+    - 流水匹配状态
+    - 来源链接
+    - 公司
+    - 发票号码
+    - 购买方
+    - 四流可用性
+    - 发票业务角色
+    - 标准项目
+    - 项目或品名
+    - 税额
+    - 销售方
+  - name: 已归项目
+    type: grid
+    filter:
+      conditions:
+      - - 标准项目
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 销售方
+    - 流水匹配状态
+    - 项目或品名
+    - 税额
+    - 开票日期
+    - 四流可用性
+    - 发票业务角色
+    - 价税合计
+    - 公司
+    - 来源链接
+    - 不含税金额
+    - 标准项目
+    - 审核状态
+    - 购买方
+    - 发票号码
+  - name: 待归项目
+    type: grid
+    filter:
+      conditions:
+      - - 标准项目
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 开票日期
+    - 不含税金额
+    - 购买方
+    - 四流可用性
+    - 流水匹配状态
+    - 价税合计
+    - 来源链接
+    - 税额
+    - 发票号码
+    - 标准项目
+    - 审核状态
+    - 项目或品名
+    - 销售方
+    - 公司
+    - 发票业务角色
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 流水匹配状态
+    - 来源链接
+    - 项目或品名
+    - 四流可用性
+    - 税额
+    - 审核状态
+    - 开票日期
+    - 购买方
+    - 销售方
+    - 标准项目
+    - 价税合计
+    - 公司
+    - 不含税金额
+    - 发票号码
+    - 发票业务角色
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 不含税金额
+    - 标准项目
+    - 发票号码
+    - 税额
+    - 购买方
+    - 流水匹配状态
+    - 发票业务角色
+    - 销售方
+    - 来源链接
+    - 开票日期
+    - 项目或品名
+    - 价税合计
+    - 公司
+    - 四流可用性
+    - 审核状态
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 审核状态
+    - 购买方
+    - 项目或品名
+    - 来源链接
+    - 发票号码
+    - 四流可用性
+    - 发票业务角色
+    - 开票日期
+    - 标准项目
+    - 价税合计
+    - 不含税金额
+    - 流水匹配状态
+    - 公司
+    - 税额
+    - 销售方
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 项目或品名
+    - 价税合计
+    - 标准项目
+    - 来源链接
+    - 公司
+    - 税额
+    - 流水匹配状态
+    - 不含税金额
+    - 四流可用性
+    - 发票业务角色
+    - 开票日期
+    - 购买方
+    - 发票号码
+    - 销售方
+    - 审核状态
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 流水匹配状态
+    - 标准项目
+    - 价税合计
+    - 审核状态
+    - 开票日期
+    - 不含税金额
+    - 来源链接
+    - 发票号码
+    - 购买方
+    - 项目或品名
+    - 销售方
+    - 税额
+    - 公司
+    - 发票业务角色
+    - 四流可用性
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 开票日期
+    - desc: true
+      field: 价税合计
+    group: []
+    visible_fields:
+    - 发票唯一键
+    - 审核状态
+    - 公司
+    - 来源链接
+    - 流水匹配状态
+    - 发票业务角色
+    - 开票日期
+    - 不含税金额
+    - 发票号码
+    - 销售方
+    - 税额
+    - 价税合计
+    - 项目或品名
+    - 购买方
+    - 标准项目
+    - 四流可用性
+- table: 合同
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 来源链接
+    - 公司
+    - 合同名称
+    - 合同编号
+    - 甲方
+    - 乙方
+    - 其他方
+    - 合同金额
+    - 签订日期
+    - 项目
+    - 标的或内容
+    - 付款条款
+    - 履约期限
+    - 来源文件Token
+    - 提取证据
+    - 审核状态
+    - 项目汇总
+    - 甲方章视觉确认
+    - 乙方章视觉确认
+    - 盖章核验说明
+    - 双章视觉状态
+    - 标准项目
+    - 本公司角色
+    - 版本组
+    - 结构化状态
+    - 交付与验收要求
+    - 拆分子合同
+    - 合同收付款审核
+    - 来源文件索引
+  - name: 合同审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 付款条款
+    - 合同名称
+    - 双章视觉状态
+    - 公司
+    - 审核状态
+    - 合同编号
+    - 合同金额
+    - 来源链接
+    - 项目
+    - 乙方
+    - 签订日期
+    - 本公司角色
+    - 标准项目
+    - 履约期限
+    - 甲方
+    - 合同收付款审核
+    - 交付与验收要求
+    - 来源文件索引
+  - name: 已进入收付款审核
+    type: grid
+    filter:
+      conditions:
+      - - 合同收付款审核
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 公司
+    - 合同金额
+    - 来源链接
+    - 本公司角色
+    - 标准项目
+    - 合同收付款审核
+    - 合同名称
+    - 交付与验收要求
+    - 签订日期
+    - 双章视觉状态
+    - 乙方
+    - 审核状态
+    - 付款条款
+    - 甲方
+    - 合同编号
+    - 项目
+    - 履约期限
+    - 来源文件索引
+  - name: 已归项目
+    type: grid
+    filter:
+      conditions:
+      - - 标准项目
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 本公司角色
+    - 合同金额
+    - 合同编号
+    - 合同名称
+    - 审核状态
+    - 签订日期
+    - 履约期限
+    - 付款条款
+    - 交付与验收要求
+    - 标准项目
+    - 合同收付款审核
+    - 公司
+    - 来源链接
+    - 项目
+    - 双章视觉状态
+    - 甲方
+    - 乙方
+    - 来源文件索引
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 合同名称
+    - 交付与验收要求
+    - 标准项目
+    - 合同金额
+    - 付款条款
+    - 乙方
+    - 项目
+    - 签订日期
+    - 双章视觉状态
+    - 合同收付款审核
+    - 本公司角色
+    - 合同编号
+    - 甲方
+    - 公司
+    - 审核状态
+    - 履约期限
+    - 来源链接
+    - 来源文件索引
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 合同编号
+    - 公司
+    - 本公司角色
+    - 合同收付款审核
+    - 来源链接
+    - 签订日期
+    - 合同金额
+    - 付款条款
+    - 审核状态
+    - 双章视觉状态
+    - 甲方
+    - 履约期限
+    - 交付与验收要求
+    - 标准项目
+    - 乙方
+    - 合同名称
+    - 项目
+    - 来源文件索引
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 合同名称
+    - 合同编号
+    - 合同金额
+    - 来源链接
+    - 审核状态
+    - 交付与验收要求
+    - 标准项目
+    - 甲方
+    - 乙方
+    - 签订日期
+    - 双章视觉状态
+    - 本公司角色
+    - 履约期限
+    - 公司
+    - 付款条款
+    - 项目
+    - 合同收付款审核
+    - 来源文件索引
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 双章视觉状态
+    - 甲方
+    - 合同名称
+    - 本公司角色
+    - 审核状态
+    - 合同收付款审核
+    - 付款条款
+    - 项目
+    - 合同编号
+    - 标准项目
+    - 履约期限
+    - 乙方
+    - 签订日期
+    - 交付与验收要求
+    - 来源链接
+    - 公司
+    - 合同金额
+    - 来源文件索引
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 公司
+    - 乙方
+    - 交付与验收要求
+    - 合同收付款审核
+    - 审核状态
+    - 履约期限
+    - 甲方
+    - 标准项目
+    - 合同编号
+    - 本公司角色
+    - 签订日期
+    - 双章视觉状态
+    - 来源链接
+    - 合同名称
+    - 项目
+    - 付款条款
+    - 合同金额
+    - 来源文件索引
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 签订日期
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同唯一键
+    - 来源链接
+    - 乙方
+    - 合同编号
+    - 项目
+    - 签订日期
+    - 审核状态
+    - 标准项目
+    - 合同金额
+    - 双章视觉状态
+    - 交付与验收要求
+    - 付款条款
+    - 合同收付款审核
+    - 甲方
+    - 履约期限
+    - 公司
+    - 合同名称
+    - 本公司角色
+    - 来源文件索引
+- table: 货物流凭证
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 凭证唯一键
+    - 公司
+    - 来源链接
+    - 凭证类型
+    - 凭证编号
+    - 业务日期
+    - 发货方
+    - 收货方
+    - 承运方
+    - 项目
+    - 货物或服务
+    - 数量
+    - 金额
+    - 签收或验收人
+    - 来源文件Token
+    - 提取证据
+    - 审核状态
+    - 标准项目
+    - 四流可用性
+    - 凭证阶段
+    - 履约价值分层
+    - 签章强度
+    - 履约事实摘要
+    - 视觉核验状态
+    - 同内容派生对象数
+    - 去重依据
+    - 内容去重状态
+  - name: 货物流审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 凭证唯一键
+    - 金额
+    - 履约价值分层
+    - 业务日期
+    - 标准项目
+    - 项目
+    - 视觉核验状态
+    - 发货方
+    - 四流可用性
+    - 货物或服务
+    - 签章强度
+    - 内容去重状态
+    - 签收或验收人
+    - 收货方
+    - 数量
+    - 凭证类型
+    - 来源链接
+    - 公司
+    - 凭证阶段
+  - name: 已归项目
+    type: grid
+    filter:
+      conditions:
+      - - 标准项目
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 凭证唯一键
+    - 金额
+    - 凭证阶段
+    - 来源链接
+    - 签收或验收人
+    - 公司
+    - 发货方
+    - 标准项目
+    - 四流可用性
+    - 内容去重状态
+    - 业务日期
+    - 收货方
+    - 数量
+    - 履约价值分层
+    - 签章强度
+    - 项目
+    - 凭证类型
+    - 视觉核验状态
+    - 货物或服务
+  - name: 未归项目
+    type: grid
+    filter:
+      conditions:
+      - - 标准项目
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 凭证唯一键
+    - 金额
+    - 签章强度
+    - 发货方
+    - 数量
+    - 项目
+    - 内容去重状态
+    - 四流可用性
+    - 标准项目
+    - 凭证类型
+    - 凭证阶段
+    - 货物或服务
+    - 履约价值分层
+    - 来源链接
+    - 业务日期
+    - 签收或验收人
+    - 公司
+    - 视觉核验状态
+    - 收货方
+- table: 项目
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 公司
+    - 项目名称
+    - 客户或业主
+    - 供应商
+    - 合同编号
+    - 合同金额
+    - 开始日期
+    - 结束日期
+    - 项目状态
+    - 证据Token集合
+    - 审核备注
+    - 归集置信度
+    - 项目判断依据
+    - 项目别名集合
+    - 成本支出合计
+    - 项目净额
+    - 流水笔数
+    - 关联流水
+    - 关联审核流水
+    - 关联合同
+    - 回款状态
+    - 系统经营判断
+    - 收入合计
+    - 关联佐证文件
+  - name: 项目经营总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 项目净额
+    - 合同金额
+    - 关联审核流水
+    - 开始日期
+    - 成本支出合计
+    - 审核备注
+    - 项目状态
+    - 流水笔数
+    - 关联合同
+    - 系统经营判断
+    - 回款状态
+    - 项目名称
+    - 归集置信度
+    - 公司
+    - 客户或业主
+    - 收入合计
+    - 供应商
+    - 结束日期
+    - 关联流水
+  - name: 已关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 合同金额
+    - 项目名称
+    - 供应商
+    - 审核备注
+    - 回款状态
+    - 归集置信度
+    - 结束日期
+    - 项目状态
+    - 公司
+    - 系统经营判断
+    - 流水笔数
+    - 关联流水
+    - 关联合同
+    - 项目净额
+    - 开始日期
+    - 客户或业主
+    - 收入合计
+    - 关联审核流水
+    - 成本支出合计
+  - name: 已关联流水
+    type: grid
+    filter:
+      conditions:
+      - - 关联流水
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 收入合计
+    - 项目状态
+    - 项目净额
+    - 流水笔数
+    - 成本支出合计
+    - 系统经营判断
+    - 开始日期
+    - 回款状态
+    - 合同金额
+    - 项目名称
+    - 审核备注
+    - 关联审核流水
+    - 关联合同
+    - 归集置信度
+    - 客户或业主
+    - 供应商
+    - 公司
+    - 关联流水
+    - 结束日期
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 关联流水
+    - 开始日期
+    - 结束日期
+    - 关联审核流水
+    - 关联合同
+    - 收入合计
+    - 客户或业主
+    - 项目净额
+    - 公司
+    - 项目名称
+    - 审核备注
+    - 系统经营判断
+    - 回款状态
+    - 项目状态
+    - 归集置信度
+    - 供应商
+    - 成本支出合计
+    - 流水笔数
+    - 合同金额
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 合同金额
+    - 关联审核流水
+    - 项目净额
+    - 流水笔数
+    - 结束日期
+    - 开始日期
+    - 系统经营判断
+    - 供应商
+    - 项目名称
+    - 收入合计
+    - 项目状态
+    - 回款状态
+    - 成本支出合计
+    - 公司
+    - 审核备注
+    - 归集置信度
+    - 客户或业主
+    - 关联合同
+    - 关联流水
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 收入合计
+    - 项目名称
+    - 项目净额
+    - 关联审核流水
+    - 成本支出合计
+    - 系统经营判断
+    - 客户或业主
+    - 结束日期
+    - 关联流水
+    - 供应商
+    - 审核备注
+    - 回款状态
+    - 关联合同
+    - 公司
+    - 开始日期
+    - 合同金额
+    - 归集置信度
+    - 项目状态
+    - 流水笔数
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 项目名称
+    - 公司
+    - 供应商
+    - 项目状态
+    - 流水笔数
+    - 关联流水
+    - 客户或业主
+    - 关联合同
+    - 系统经营判断
+    - 成本支出合计
+    - 合同金额
+    - 项目净额
+    - 结束日期
+    - 审核备注
+    - 回款状态
+    - 关联审核流水
+    - 收入合计
+    - 归集置信度
+    - 开始日期
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 关联流水
+    - 成本支出合计
+    - 结束日期
+    - 客户或业主
+    - 关联合同
+    - 流水笔数
+    - 归集置信度
+    - 项目名称
+    - 收入合计
+    - 审核备注
+    - 关联审核流水
+    - 供应商
+    - 系统经营判断
+    - 开始日期
+    - 公司
+    - 项目净额
+    - 项目状态
+    - 合同金额
+    - 回款状态
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目唯一键
+    - 供应商
+    - 收入合计
+    - 公司
+    - 成本支出合计
+    - 开始日期
+    - 回款状态
+    - 归集置信度
+    - 流水笔数
+    - 关联审核流水
+    - 系统经营判断
+    - 关联合同
+    - 项目净额
+    - 关联流水
+    - 客户或业主
+    - 结束日期
+    - 合同金额
+    - 项目名称
+    - 审核备注
+    - 项目状态
+- table: 四流一致审核
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 关联流水
+    - 公司
+    - 流水时间
+    - 收支方向
+    - 流水金额
+    - 项目
+    - 关联合同
+    - 关联回单
+    - 关联发票
+    - 关联货物流
+    - 回单状态
+    - 发票状态
+    - 合同状态
+    - 货物流状态
+    - 匹配依据
+    - 总体结论
+    - 待处理事项
+    - 业务类型
+    - 三流适用性说明
+    - 候选说明
+    - 审核意见
+    - 人工审核状态
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 回单记录ID
+    - 流水记录ID
+    - 发票记录ID
+    - 合同记录ID
+    - 货物流记录ID
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 四流全关联
+    type: grid
+    filter:
+      conditions:
+      - - 合同状态
+        - ==
+        - - 已关联
+      - - 回单状态
+        - ==
+        - - 已关联
+      - - 发票状态
+        - ==
+        - - 已关联
+      - - 货物流状态
+        - ==
+        - - 已关联
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 公司
+    - 人工审核状态
+    - 待处理事项
+    - 流水时间
+    - 交易对象
+    - 流水金额
+    - 关联合同
+    - 关联流水
+    - 回单状态
+    - 关联回单
+    - 发票状态
+    - 关联发票
+    - 收支方向
+    - 流水记录ID
+    - 合同记录ID
+    - 业务类型
+    - 匹配依据
+    - 审核意见
+    - 三流适用性说明
+    - 合同状态
+    - 货物流状态
+    - 关联货物流
+    - 项目
+    - 回单记录ID
+    - 总体结论
+    - 货物流记录ID
+    - 发票记录ID
+    - 候选说明
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 缺合同
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - ==
+        - - 奥岑
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 公司
+    - 人工审核状态
+    - 待处理事项
+    - 流水时间
+    - 交易对象
+    - 流水金额
+    - 关联流水
+    - 关联回单
+    - 回单状态
+    - 发票状态
+    - 关联发票
+    - 收支方向
+    - 流水记录ID
+    - 合同记录ID
+    - 业务类型
+    - 匹配依据
+    - 审核意见
+    - 三流适用性说明
+    - 合同状态
+    - 关联合同
+    - 货物流状态
+    - 关联货物流
+    - 项目
+    - 回单记录ID
+    - 总体结论
+    - 货物流记录ID
+    - 发票记录ID
+    - 候选说明
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 四流候选审核
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: false
+      field: 公司
+    - desc: true
+      field: 流水时间
+    group:
+    - desc: false
+      field: 人工审核状态
+    - desc: false
+      field: 总体结论
+    visible_fields:
+    - 审核唯一键
+    - 发票状态
+    - 待处理事项
+    - 流水金额
+    - 关联发票
+    - 收支方向
+    - 流水记录ID
+    - 合同记录ID
+    - 交易对象
+    - 业务类型
+    - 人工审核状态
+    - 流水时间
+    - 匹配依据
+    - 审核意见
+    - 三流适用性说明
+    - 回单状态
+    - 关联货物流
+    - 货物流状态
+    - 关联回单
+    - 项目
+    - 回单记录ID
+    - 总体结论
+    - 关联流水
+    - 货物流记录ID
+    - 合同状态
+    - 发票记录ID
+    - 关联合同
+    - 候选说明
+    - 公司
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 快速审核
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 公司
+    - 人工审核状态
+    - 流水时间
+    - 交易对象
+    - 流水金额
+    - 关联流水
+    - 回单状态
+    - 关联回单
+    - 发票状态
+    - 关联发票
+    - 合同状态
+    - 关联合同
+    - 货物流状态
+    - 关联货物流
+    - 项目
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 需要合同且有合同
+    type: grid
+    filter:
+      conditions:
+      - - 合同状态
+        - ==
+        - - 已关联
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 公司
+    - 人工审核状态
+    - 待处理事项
+    - 流水时间
+    - 交易对象
+    - 流水金额
+    - 关联合同
+    - 关联流水
+    - 关联回单
+    - 回单状态
+    - 发票状态
+    - 关联发票
+    - 收支方向
+    - 流水记录ID
+    - 合同记录ID
+    - 业务类型
+    - 匹配依据
+    - 审核意见
+    - 三流适用性说明
+    - 合同状态
+    - 货物流状态
+    - 关联货物流
+    - 项目
+    - 回单记录ID
+    - 总体结论
+    - 货物流记录ID
+    - 发票记录ID
+    - 候选说明
+    - 项目汇总
+    - 标准项目
+    - 系统风险判断
+    - 风险标签
+    - 风险核验状态
+    - 关联佐证文件
+    - 应补非购销证据分类
+  - name: 应补非购销证据
+    type: grid
+    filter:
+      conditions:
+      - - 应补非购销证据分类
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 流水金额
+    group:
+    - desc: false
+      field: 应补非购销证据分类
+    - desc: false
+      field: 业务类型
+    visible_fields:
+    - 审核唯一键
+    - 发票状态
+    - 人工审核状态
+    - 总体结论
+    - 审核意见
+    - 货物流状态
+    - 回单状态
+    - 公司
+    - 关联佐证文件
+    - 流水记录ID
+    - 合同状态
+    - 项目汇总
+    - 匹配依据
+    - 关联货物流
+    - 候选说明
+    - 待处理事项
+    - 项目
+    - 业务类型
+    - 关联回单
+    - 交易对象
+    - 系统风险判断
+    - 货物流记录ID
+    - 合同记录ID
+    - 发票记录ID
+    - 三流适用性说明
+    - 流水时间
+    - 回单记录ID
+    - 风险标签
+    - 收支方向
+    - 关联发票
+    - 流水金额
+    - 关联流水
+    - 应补非购销证据分类
+    - 关联合同
+    - 风险核验状态
+    - 标准项目
+  - name: 四流审核总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 交易对象
+    - 项目
+    - 待处理事项
+    - 合同状态
+    - 人工审核状态
+    - 候选说明
+    - 关联回单
+    - 流水金额
+    - 关联货物流
+    - 回单状态
+    - 关联发票
+    - 收支方向
+    - 货物流状态
+    - 系统风险判断
+    - 公司
+    - 匹配依据
+    - 审核意见
+    - 关联合同
+    - 流水时间
+    - 风险标签
+    - 发票状态
+    - 风险核验状态
+    - 业务类型
+    - 标准项目
+    - 总体结论
+  - name: 已关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 货物流状态
+    - 关联货物流
+    - 关联合同
+    - 回单状态
+    - 风险标签
+    - 业务类型
+    - 系统风险判断
+    - 公司
+    - 收支方向
+    - 关联回单
+    - 合同状态
+    - 标准项目
+    - 关联发票
+    - 人工审核状态
+    - 流水金额
+    - 发票状态
+    - 匹配依据
+    - 候选说明
+    - 风险核验状态
+    - 项目
+    - 流水时间
+    - 交易对象
+    - 待处理事项
+    - 总体结论
+    - 审核意见
+  - name: 未关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 关联合同
+    - 标准项目
+    - 发票状态
+    - 风险核验状态
+    - 业务类型
+    - 系统风险判断
+    - 公司
+    - 关联货物流
+    - 匹配依据
+    - 候选说明
+    - 总体结论
+    - 审核意见
+    - 流水金额
+    - 交易对象
+    - 流水时间
+    - 关联发票
+    - 合同状态
+    - 关联回单
+    - 回单状态
+    - 收支方向
+    - 待处理事项
+    - 人工审核状态
+    - 项目
+    - 风险标签
+    - 货物流状态
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 风险核验状态
+    - 关联发票
+    - 业务类型
+    - 关联合同
+    - 关联回单
+    - 货物流状态
+    - 审核意见
+    - 收支方向
+    - 总体结论
+    - 系统风险判断
+    - 回单状态
+    - 流水金额
+    - 候选说明
+    - 待处理事项
+    - 项目
+    - 公司
+    - 流水时间
+    - 风险标签
+    - 人工审核状态
+    - 合同状态
+    - 交易对象
+    - 标准项目
+    - 匹配依据
+    - 关联货物流
+    - 发票状态
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 项目
+    - 人工审核状态
+    - 回单状态
+    - 关联发票
+    - 关联货物流
+    - 货物流状态
+    - 公司
+    - 流水时间
+    - 风险标签
+    - 待处理事项
+    - 关联回单
+    - 总体结论
+    - 标准项目
+    - 发票状态
+    - 交易对象
+    - 匹配依据
+    - 系统风险判断
+    - 收支方向
+    - 流水金额
+    - 候选说明
+    - 风险核验状态
+    - 业务类型
+    - 合同状态
+    - 审核意见
+    - 关联合同
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 公司
+    - 合同状态
+    - 关联合同
+    - 回单状态
+    - 关联回单
+    - 货物流状态
+    - 关联货物流
+    - 发票状态
+    - 关联发票
+    - 人工审核状态
+    - 总体结论
+    - 收支方向
+    - 匹配依据
+    - 审核意见
+    - 风险标签
+    - 标准项目
+    - 流水时间
+    - 项目
+    - 业务类型
+    - 系统风险判断
+    - 流水金额
+    - 待处理事项
+    - 候选说明
+    - 风险核验状态
+    - 交易对象
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 候选说明
+    - 项目
+    - 关联发票
+    - 回单状态
+    - 合同状态
+    - 流水时间
+    - 关联合同
+    - 发票状态
+    - 收支方向
+    - 交易对象
+    - 业务类型
+    - 人工审核状态
+    - 总体结论
+    - 流水金额
+    - 公司
+    - 匹配依据
+    - 待处理事项
+    - 系统风险判断
+    - 风险标签
+    - 审核意见
+    - 关联货物流
+    - 货物流状态
+    - 标准项目
+    - 关联回单
+    - 风险核验状态
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 流水金额
+    - 回单状态
+    - 人工审核状态
+    - 关联合同
+    - 总体结论
+    - 合同状态
+    - 业务类型
+    - 候选说明
+    - 匹配依据
+    - 发票状态
+    - 待处理事项
+    - 关联发票
+    - 货物流状态
+    - 流水时间
+    - 关联回单
+    - 审核意见
+    - 关联货物流
+    - 风险核验状态
+    - 收支方向
+    - 项目
+    - 系统风险判断
+    - 交易对象
+    - 标准项目
+    - 公司
+    - 风险标签
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group: []
+    visible_fields:
+    - 审核唯一键
+    - 系统风险判断
+    - 交易对象
+    - 货物流状态
+    - 候选说明
+    - 匹配依据
+    - 关联回单
+    - 待处理事项
+    - 流水时间
+    - 关联合同
+    - 审核意见
+    - 发票状态
+    - 回单状态
+    - 人工审核状态
+    - 风险核验状态
+    - 收支方向
+    - 合同状态
+    - 关联发票
+    - 流水金额
+    - 公司
+    - 标准项目
+    - 业务类型
+    - 总体结论
+    - 项目
+    - 关联货物流
+    - 风险标签
+  - name: 按交易对象分组
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 流水时间
+    - desc: true
+      field: 流水金额
+    group:
+    - desc: false
+      field: 交易对象
+    visible_fields:
+    - 审核唯一键
+    - 交易对象
+    - 回单记录ID
+    - 发票状态
+    - 公司
+    - 合同状态
+    - 流水时间
+    - 风险标签
+    - 三流适用性说明
+    - 候选说明
+    - 合同记录ID
+    - 系统风险判断
+    - 收支方向
+    - 匹配依据
+    - 项目
+    - 流水金额
+    - 风险核验状态
+    - 流水记录ID
+    - 关联货物流
+    - 总体结论
+    - 关联佐证文件
+    - 货物流状态
+    - 关联合同
+    - 项目汇总
+    - 回单状态
+    - 人工审核状态
+    - 业务类型
+    - 应补非购销证据分类
+    - 审核意见
+    - 关联流水
+    - 待处理事项
+    - 关联发票
+    - 关联回单
+    - 标准项目
+    - 货物流记录ID
+    - 发票记录ID
+- table: 合同收付款审核
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions:
+      - - 合同资金审核键
+        - ==
+        - null
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 关联合同
+    - 合同事实键
+    - 合同名称
+    - 合同编号
+    - 公司
+    - 合同性质
+    - 合同对方
+    - 合同金额
+    - 签订日期
+    - 付款条款
+    - 履约与到期依据
+    - 标准项目
+    - 第1期应收条件
+    - 第1期应收金额
+    - 第1期应收DDL
+    - 第2期应收条件
+    - 第2期应收金额
+    - 第2期应收DDL
+    - 第3期应收条件
+    - 第3期应收金额
+    - 第3期应收DDL
+    - 第4期应收条件
+    - 第4期应收金额
+    - 第4期应收DDL
+    - 质保尾款金额
+    - 质保尾款DDL
+    - 全部关联流水
+    - 全部关联回单
+    - 第1笔回款流水
+    - 第1笔回款日期
+    - 第1笔回款金额
+    - 第2笔回款流水
+    - 第2笔回款日期
+    - 第2笔回款金额
+    - 第3笔回款流水
+    - 第3笔回款日期
+    - 第3笔回款金额
+    - 第4笔回款流水
+    - 第4笔回款日期
+    - 第4笔回款金额
+    - 第5笔回款流水
+    - 第5笔回款日期
+    - 第5笔回款金额
+    - 第6笔回款流水
+    - 第6笔回款日期
+    - 第6笔回款金额
+    - 已回款合计
+    - 未结算金额
+    - 回款状态
+    - 匹配判断
+    - 异常与催收提示
+    - 反向复核结果
+    - 人工审核状态
+    - 人工审核意见
+    - 处理批次
+    - 合并至主记录
+    - 合同事实状态
+    - 未付款金额
+    - 付款状态
+    - 已付款合计
+  - name: 合同回款总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 合同事实键
+    - 合同编号
+    - 付款条款
+    - 质保尾款金额
+    - 第4笔回款金额
+    - 未结算金额
+    - 异常与催收提示
+    - 第1笔回款日期
+    - 合同金额
+    - 第3笔回款金额
+    - 合同性质
+    - 处理批次
+    - 第5笔回款日期
+    - 第1期应收金额
+    - 第3笔回款日期
+    - 第2笔回款日期
+    - 合同名称
+    - 第1期应收条件
+    - 第4期应收金额
+    - 标准项目
+    - 第4期应收DDL
+    - 回款状态
+    - 第3笔回款流水
+    - 第3期应收条件
+    - 关联合同
+    - 第3期应收DDL
+    - 质保尾款DDL
+    - 公司
+    - 人工审核状态
+    - 第2期应收金额
+    - 第5笔回款流水
+    - 第4笔回款日期
+    - 全部关联回单
+    - 签订日期
+    - 反向复核结果
+    - 第6笔回款日期
+    - 第4期应收条件
+    - 第1笔回款金额
+    - 第2笔回款金额
+    - 匹配判断
+    - 第1期应收DDL
+    - 第2期应收条件
+    - 第6笔回款金额
+    - 合同对方
+    - 第2笔回款流水
+    - 人工审核意见
+    - 第1笔回款流水
+    - 第2期应收DDL
+    - 第3期应收金额
+    - 履约与到期依据
+    - 第5笔回款金额
+    - 第4笔回款流水
+    - 已回款合计
+    - 第6笔回款流水
+    - 全部关联流水
+    - 合并至主记录
+    - 合同事实状态
+    - 未付款金额
+    - 付款状态
+    - 已付款合计
+  - name: 收款合同审核
+    type: grid
+    filter:
+      conditions:
+      - - 合同性质
+        - ==
+        - - 收款合同
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 签订日期
+    - 第1笔回款金额
+    - 异常与催收提示
+    - 第3笔回款金额
+    - 第4期应收金额
+    - 第2笔回款金额
+    - 第4期应收DDL
+    - 第1期应收条件
+    - 第3期应收DDL
+    - 第3笔回款日期
+    - 人工审核意见
+    - 匹配判断
+    - 合同编号
+    - 第1期应收DDL
+    - 已回款合计
+    - 第3期应收金额
+    - 第5笔回款流水
+    - 回款状态
+    - 第4期应收条件
+    - 第1笔回款日期
+    - 第2期应收DDL
+    - 第3笔回款流水
+    - 质保尾款金额
+    - 第2期应收金额
+    - 第1期应收金额
+    - 第1笔回款流水
+    - 公司
+    - 合同名称
+    - 第5笔回款金额
+    - 第4笔回款流水
+    - 合同金额
+    - 第4笔回款金额
+    - 第6笔回款流水
+    - 全部关联流水
+    - 第2笔回款流水
+    - 人工审核状态
+    - 第4笔回款日期
+    - 质保尾款DDL
+    - 第2期应收条件
+    - 第5笔回款日期
+    - 第2笔回款日期
+    - 第3期应收条件
+    - 第6笔回款日期
+    - 全部关联回单
+    - 未结算金额
+    - 第6笔回款金额
+    - 合同对方
+  - name: 付款合同审核
+    type: grid
+    filter:
+      conditions:
+      - - 合同性质
+        - ==
+        - - 付款合同
+      - - 合同事实状态
+        - ==
+        - - 主合同事实
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 已付款合计
+    - 履约与到期依据
+    - 合同名称
+    - 匹配判断
+    - 签订日期
+    - 未付款金额
+    - 反向复核结果
+    - 全部关联回单
+    - 人工审核意见
+    - 公司
+    - 合同对方
+    - 人工审核状态
+    - 付款状态
+    - 合同金额
+    - 合同编号
+    - 全部关联流水
+    - 付款条款
+    - 异常与催收提示
+  - name: 待催收
+    type: grid
+    filter:
+      conditions:
+      - - 回款状态
+        - ==
+        - - 逾期未结算/应催收
+      - - 回款状态
+        - ==
+        - - 部分逾期/应催收
+      logic: or
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 合同金额
+    - 人工审核状态
+    - 合同名称
+    - 异常与催收提示
+    - 第2期应收DDL
+    - 未结算金额
+    - 第1期应收DDL
+    - 合同对方
+    - 质保尾款DDL
+    - 人工审核意见
+    - 合同编号
+    - 全部关联流水
+    - 已回款合计
+    - 回款状态
+    - 全部关联回单
+    - 公司
+    - 匹配判断
+  - name: 多候选待审
+    type: grid
+    filter:
+      conditions:
+      - - 回款状态
+        - ==
+        - - 多候选待审
+      - - 付款状态
+        - ==
+        - - 多候选待审
+      logic: or
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 合同名称
+    - 未结算金额
+    - 合同金额
+    - 已付款合计
+    - 回款状态
+    - 合同编号
+    - 人工审核状态
+    - 匹配判断
+    - 人工审核意见
+    - 已回款合计
+    - 全部关联流水
+    - 全部关联回单
+    - 未付款金额
+    - 异常与催收提示
+    - 合同对方
+    - 付款状态
+    - 合同性质
+    - 公司
+  - name: 合同资金总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 公司
+    - 合同名称
+    - 标准项目
+    - 未结算金额
+    - 已回款合计
+    - 已付款合计
+    - 付款状态
+    - 人工审核意见
+    - 回款状态
+    - 未付款金额
+    - 人工审核状态
+    - 匹配判断
+    - 反向复核结果
+    - 合同性质
+    - 异常与催收提示
+    - 合同金额
+    - 合同对方
+    - 合同编号
+    - 全部关联回单
+    - 签订日期
+    - 全部关联流水
+    - 合同事实状态
+  - name: 公司｜北博
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 北博
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 合同对方
+    - 未结算金额
+    - 合同名称
+    - 合同金额
+    - 回款状态
+    - 合同编号
+    - 匹配判断
+    - 人工审核意见
+    - 合同事实状态
+    - 未付款金额
+    - 全部关联流水
+    - 全部关联回单
+    - 异常与催收提示
+    - 人工审核状态
+    - 公司
+    - 已付款合计
+    - 签订日期
+    - 反向复核结果
+    - 合同性质
+    - 已回款合计
+    - 标准项目
+    - 付款状态
+  - name: 公司｜奥岑
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 奥岑
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 未付款金额
+    - 全部关联流水
+    - 合同名称
+    - 异常与催收提示
+    - 人工审核意见
+    - 未结算金额
+    - 回款状态
+    - 合同事实状态
+    - 合同编号
+    - 标准项目
+    - 已回款合计
+    - 匹配判断
+    - 签订日期
+    - 反向复核结果
+    - 公司
+    - 付款状态
+    - 合同金额
+    - 合同对方
+    - 人工审核状态
+    - 全部关联回单
+    - 已付款合计
+    - 合同性质
+  - name: 公司｜高灿
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高灿
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 全部关联回单
+    - 未付款金额
+    - 异常与催收提示
+    - 人工审核状态
+    - 签订日期
+    - 合同性质
+    - 合同编号
+    - 已回款合计
+    - 匹配判断
+    - 已付款合计
+    - 全部关联流水
+    - 合同对方
+    - 公司
+    - 回款状态
+    - 未结算金额
+    - 人工审核意见
+    - 合同事实状态
+    - 标准项目
+    - 反向复核结果
+    - 合同金额
+    - 付款状态
+    - 合同名称
+  - name: 公司｜丰聚
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 丰聚
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 合同编号
+    - 未结算金额
+    - 人工审核状态
+    - 公司
+    - 合同名称
+    - 异常与催收提示
+    - 全部关联回单
+    - 签订日期
+    - 合同对方
+    - 标准项目
+    - 付款状态
+    - 反向复核结果
+    - 合同事实状态
+    - 合同金额
+    - 全部关联流水
+    - 匹配判断
+    - 已回款合计
+    - 合同性质
+    - 未付款金额
+    - 人工审核意见
+    - 已付款合计
+    - 回款状态
+  - name: 公司｜高众
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 高众
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 异常与催收提示
+    - 公司
+    - 未结算金额
+    - 人工审核状态
+    - 付款状态
+    - 标准项目
+    - 合同金额
+    - 合同名称
+    - 全部关联回单
+    - 合同事实状态
+    - 合同对方
+    - 未付款金额
+    - 匹配判断
+    - 签订日期
+    - 回款状态
+    - 全部关联流水
+    - 人工审核意见
+    - 已付款合计
+    - 合同编号
+    - 合同性质
+    - 反向复核结果
+    - 已回款合计
+  - name: 公司｜天盾
+    type: grid
+    filter:
+      conditions:
+      - - 公司
+        - intersects
+        - - 天盾
+      logic: and
+    sort:
+    - desc: true
+      field: 合同金额
+    group: []
+    visible_fields:
+    - 合同资金审核键
+    - 异常与催收提示
+    - 合同事实状态
+    - 人工审核意见
+    - 匹配判断
+    - 反向复核结果
+    - 公司
+    - 已回款合计
+    - 标准项目
+    - 签订日期
+    - 回款状态
+    - 未结算金额
+    - 合同金额
+    - 人工审核状态
+    - 合同编号
+    - 未付款金额
+    - 全部关联回单
+    - 付款状态
+    - 合同性质
+    - 已付款合计
+    - 合同名称
+    - 合同对方
+    - 全部关联流水
+- table: 项目流水汇总
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 项目归集键
+    - 公司
+    - 项目名称
+    - 归集状态
+    - 收入合计
+    - 成本支出合计
+    - 项目净额
+    - 流水笔数
+    - 关联流水
+    - 关联合同
+    - 归集依据
+    - 审核状态
+    - 关联审核流水
+    - 标准项目
+  - name: 项目收支总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 成本支出合计
+    group:
+    - desc: false
+      field: 公司
+    - desc: false
+      field: 归集状态
+    visible_fields:
+    - 项目归集键
+    - 关联合同
+    - 归集状态
+    - 关联流水
+    - 成本支出合计
+    - 流水笔数
+    - 公司
+    - 审核状态
+    - 项目名称
+    - 项目净额
+    - 归集依据
+    - 收入合计
+    - 关联审核流水
+    - 标准项目
+  - name: 项目收支审核
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目归集键
+    - 收入合计
+    - 归集状态
+    - 项目名称
+    - 成本支出合计
+    - 标准项目
+    - 流水笔数
+    - 关联合同
+    - 归集依据
+    - 公司
+    - 关联流水
+    - 项目净额
+    - 审核状态
+    - 关联审核流水
+  - name: 已关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目归集键
+    - 标准项目
+    - 关联审核流水
+    - 公司
+    - 归集依据
+    - 收入合计
+    - 归集状态
+    - 审核状态
+    - 项目名称
+    - 关联合同
+    - 成本支出合计
+    - 关联流水
+    - 项目净额
+    - 流水笔数
+  - name: 未关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 收入合计
+    - desc: true
+      field: 项目净额
+    group: []
+    visible_fields:
+    - 项目归集键
+    - 项目净额
+    - 项目名称
+    - 成本支出合计
+    - 审核状态
+    - 标准项目
+    - 归集依据
+    - 收入合计
+    - 关联合同
+    - 归集状态
+    - 关联流水
+    - 公司
+    - 流水笔数
+    - 关联审核流水
+- table: 待人工确认
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 确认项唯一键
+    - 公司
+    - 确认类型
+    - 对象Token或记录ID
+    - 对象链接
+    - 候选结论
+    - 不确定原因
+    - 证据摘要
+    - 优先级
+    - 处理状态
+    - 人工结论
+    - 处理备注
+  - name: 人工确认总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 确认项唯一键
+    - 优先级
+    - 证据摘要
+    - 对象链接
+    - 处理状态
+    - 公司
+    - 人工结论
+    - 处理备注
+    - 确认类型
+    - 不确定原因
+    - 候选结论
+  - name: 未给人工结论
+    type: grid
+    filter:
+      conditions:
+      - - 人工结论
+        - empty
+        - null
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 确认项唯一键
+    - 处理状态
+    - 优先级
+    - 对象链接
+    - 不确定原因
+    - 证据摘要
+    - 处理备注
+    - 人工结论
+    - 确认类型
+    - 候选结论
+    - 公司
+- table: 处理运行记录
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 运行唯一键
+    - 阶段
+    - 范围
+    - 已处理数量
+    - 成功数量
+    - 失败数量
+    - 状态
+    - 检查点
+    - 说明
+  - name: 运行结果总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 失败数量
+    group: []
+    visible_fields:
+    - 运行唯一键
+    - 成功数量
+    - 状态
+    - 失败数量
+    - 检查点
+    - 阶段
+    - 说明
+    - 已处理数量
+    - 范围
+  - name: 存在失败
+    type: grid
+    filter:
+      conditions:
+      - - 失败数量
+        - '>'
+        - 0
+      logic: and
+    sort:
+    - desc: true
+      field: 失败数量
+    group: []
+    visible_fields:
+    - 运行唯一键
+    - 检查点
+    - 已处理数量
+    - 成功数量
+    - 失败数量
+    - 说明
+    - 范围
+    - 状态
+    - 阶段
+- table: 独立履约事实
+  views:
+  - name: Grid View
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort: []
+    group: []
+    visible_fields:
+    - 履约事实ID
+    - 公司
+    - 凭证阶段
+    - 业务日期
+    - 发货或服务方
+    - 收货或验收方
+    - 项目或单据键
+    - 货物或服务明细
+    - 数量
+    - 金额
+    - 签章强度
+    - 视觉核验结论
+    - 来源货物流记录
+    - 关联审核流水
+    - 关联合同
+    - 事实状态
+    - 证据说明
+  - name: 履约事实总览
+    type: grid
+    filter:
+      conditions: []
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 履约事实ID
+    - 公司
+    - 事实状态
+    - 视觉核验结论
+    - 货物或服务明细
+    - 发货或服务方
+    - 项目或单据键
+    - 关联审核流水
+    - 来源货物流记录
+    - 收货或验收方
+    - 金额
+    - 数量
+    - 业务日期
+    - 关联合同
+    - 签章强度
+    - 证据说明
+    - 凭证阶段
+  - name: 已关联合同
+    type: grid
+    filter:
+      conditions:
+      - - 关联合同
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 履约事实ID
+    - 事实状态
+    - 凭证阶段
+    - 货物或服务明细
+    - 发货或服务方
+    - 数量
+    - 关联审核流水
+    - 公司
+    - 证据说明
+    - 来源货物流记录
+    - 金额
+    - 业务日期
+    - 收货或验收方
+    - 关联合同
+    - 视觉核验结论
+    - 签章强度
+    - 项目或单据键
+  - name: 已关联审核流水
+    type: grid
+    filter:
+      conditions:
+      - - 关联审核流水
+        - non_empty
+        - null
+      logic: and
+    sort:
+    - desc: true
+      field: 业务日期
+    - desc: true
+      field: 金额
+    group: []
+    visible_fields:
+    - 履约事实ID
+    - 货物或服务明细
+    - 事实状态
+    - 证据说明
+    - 项目或单据键
+    - 关联合同
+    - 业务日期
+    - 签章强度
+    - 来源货物流记录
+    - 金额
+    - 视觉核验结论
+    - 收货或验收方
+    - 发货或服务方
+    - 关联审核流水
+    - 数量
+    - 凭证阶段
+    - 公司
