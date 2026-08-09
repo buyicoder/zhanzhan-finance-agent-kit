@@ -43,8 +43,18 @@
 - `protocols/`：映射、证据包、写入和完成标准。
 - `reference-implementation/`：现有财务四流一致 Base 的标准参考实现。
 - `adapters/`：不同 Agent/Harness 的适配说明。
+- `tools/`：随项目交付、由 Agent 调用的确定性工具；当前包含受计划约束的回单切割器。
 - `wiki/`：客户飞书 Wiki 模板。
 
 ## 当前状态
 
-`0.2.0` 提供完整八阶段入职门、可校验配置、实战四流 skill，以及从真实 Base 快照生成的脱敏字段参考。它不会因为读到 GitHub 链接就擅自写客户数据；进入生产前仍需客户确认租户配置、字段映射和单文件验收结果。
+`0.3.0` 在完整入职门、实战四流 skill 和脱敏 Base 参考实现之外，加入了可移植的回单切割工具。Agent 必须先视觉确认边界并提交切割计划，工具只执行、校验和生成证据清单；它不会自行认定回单边界，也不会直接写客户 Base。进入生产前仍需客户确认租户配置、字段映射和单文件验收结果。
+
+## 回单切割工具
+
+```bash
+python3 -m pip install -r requirements-dev.txt
+python3 scripts/receipt_split.py source.pdf plan.json output-directory
+```
+
+计划格式见 `examples/receipt-split-plan.example.json`。坐标采用页面左上角为原点的归一化 `[x0, y0, x1, y1]`；一个页面可切出多张回单，一张回单也可由多个页面区域组成。成功输出包含派生 PDF、逐页 PNG 预览和 `receipt-split-manifest.json`。该清单是后续上传和受控写入的证据，不代表生产写入授权。

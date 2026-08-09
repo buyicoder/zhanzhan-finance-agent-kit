@@ -1,5 +1,5 @@
 project: zhanzhan-finance-agent-kit
-version: 0.2.0
+version: 0.3.0
 language: zh-CN
 entrypoint: AGENT-ONBOARDING.md
 deployment_model: agent-guided
@@ -15,6 +15,12 @@ required_capabilities:
   - wiki_create_update
   - image_vision
   - pdf_render
+  - local_tool_execution
+bundled_tools:
+  - name: receipt-split
+    entrypoint: scripts/receipt_split.py
+    contract: schemas/receipt-split-plan.schema.json
+    authority: execute_agent_authored_plan_only
 hard_gates:
   - capability_audit
   - tenant_confirmation

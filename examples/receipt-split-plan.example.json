@@ -1,0 +1,20 @@
+{
+  "plan_version": "receipt-split-plan/1",
+  "parent_object_id": "replace-with-source-file-token",
+  "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "receipts": [
+    {
+      "receipt_id": "receipt-001",
+      "filename": "已确认回单号-001",
+      "segments": [{"page": 1, "bbox": [0, 0, 1, 0.5]}]
+    },
+    {
+      "receipt_id": "receipt-002",
+      "filename": "已确认回单号-002",
+      "segments": [
+        {"page": 1, "bbox": [0, 0.5, 1, 1]},
+        {"page": 2, "bbox": [0, 0, 1, 1]}
+      ]
+    }
+  ]
+}

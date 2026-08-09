@@ -2,6 +2,8 @@
 
 你正在部署“占占财务文件 AI 直做”系统。请先读取 `manifest.yaml`，然后顺序执行本文件。每完成一个阶段，将结果写入符合 `schemas/onboarding-state.schema.json` 的状态文件。
 
+先运行 `python3 scripts/validate_project.py` 校验项目，再按 `onboarding/01-capability-audit.md` 验收随项目交付的确定性工具。回单切割工具属于项目能力，不得只根据手册文字宣称存在。
+
 ## 不可跳过的边界
 
 - 未完成能力审计前不得读取历史业务文件。

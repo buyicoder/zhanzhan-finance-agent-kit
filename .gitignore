@@ -4,4 +4,6 @@ tenant-config.yaml
 runtime/
 artifacts/
 *.local.yaml
-
+__pycache__/
+*.py[cod]
+.pytest_cache/

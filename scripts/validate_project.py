@@ -28,6 +28,11 @@ def main() -> None:
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
 
+    split_schema = json.loads(
+        (ROOT / "schemas" / "receipt-split-plan.schema.json").read_text(encoding="utf-8")
+    )
+    Draft202012Validator.check_schema(split_schema)
+
     example = load_yaml(ROOT / "examples" / "tenant-config.example.yaml")
     errors = sorted(
         Draft202012Validator(schema).iter_errors(example),
@@ -47,6 +52,9 @@ def main() -> None:
         ROOT / "skills" / "finance-four-flow-audit" / "SKILL.md",
         ROOT / "skills" / "domain-manuals" / "README.md",
         ROOT / "wiki" / "home-template.md",
+        ROOT / "tools" / "receipt_splitter.py",
+        ROOT / "scripts" / "receipt_split.py",
+        ROOT / "examples" / "receipt-split-plan.example.json",
     ]
     missing = [str(path.relative_to(ROOT)) for path in required_paths if not path.is_file()]
     if missing:

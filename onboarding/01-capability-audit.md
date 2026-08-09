@@ -21,6 +21,17 @@
 - 压缩包安全解包；
 - 图片视觉阅读、二维码解码和 OCR 辅助。
 
+## 随项目交付的工具验收
+
+回单切割不是外部能力假设。部署 Agent 必须安装项目依赖并执行：
+
+```bash
+python3 scripts/receipt_split.py --help
+python3 -m pytest -q tests/test_receipt_splitter.py
+```
+
+只有命令可调用且测试通过，才可将 `receipt_split` 标为 AVAILABLE。真实租户验收还必须选择一份经视觉确认边界的回单集合 PDF，执行切割并逐页查看工具生成的 PNG 预览。未完成真实原件验收时只能标记 PARTIAL，不能宣称生产可用。
+
 ## 写入闭环
 
 - 动作清单校验；
@@ -33,4 +44,3 @@
 - 补偿、回滚、checkpoint 和回执。
 
 存在任意写入保护缺口时，最终结论必须为 NOT READY。
-

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhanzhan.example/schemas/receipt-split-plan.schema.json",
+  "title": "Agent-authored receipt split plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plan_version", "parent_object_id", "source_sha256", "receipts"],
+  "properties": {
+    "plan_version": {"const": "receipt-split-plan/1"},
+    "parent_object_id": {"type": "string", "minLength": 1},
+    "source_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "receipts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["receipt_id", "filename", "segments"],
+        "properties": {
+          "receipt_id": {"type": "string", "minLength": 1},
+          "filename": {"type": "string", "minLength": 1},
+          "segments": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["page", "bbox"],
+              "properties": {
+                "page": {"type": "integer", "minimum": 1},
+                "bbox": {
+                  "type": "array",
+                  "prefixItems": [
+                    {"type": "number", "minimum": 0, "maximum": 1},
+                    {"type": "number", "minimum": 0, "maximum": 1},
+                    {"type": "number", "minimum": 0, "maximum": 1},
+                    {"type": "number", "minimum": 0, "maximum": 1}
+                  ],
+                  "items": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
