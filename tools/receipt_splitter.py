@@ -91,9 +91,12 @@ def _normalize_plan(plan: dict[str, Any], page_count: int) -> dict[str, Any]:
             {"receipt_id": receipt_id, "filename": filename, "segments": normalized_segments}
         )
 
+    parent_object_id = str(plan.get("parent_object_id", "")).strip()
+    if not parent_object_id:
+        raise SplitPlanError("parent_object_id is required")
     return {
         "plan_version": str(plan.get("plan_version", "receipt-split-plan/1")),
-        "parent_object_id": str(plan.get("parent_object_id", "")).strip(),
+        "parent_object_id": parent_object_id,
         "receipts": normalized_receipts,
     }
 
@@ -162,7 +165,9 @@ def execute_split_plan(source: Path | str, plan: dict[str, Any], output_dir: Pat
             raise SplitPlanError("source PDF has no pages")
         normalized = _normalize_plan(plan, document.page_count)
         expected_sha = str(plan.get("source_sha256", "")).lower().strip()
-        if expected_sha and expected_sha != source_sha256:
+        if not re.fullmatch(r"[a-f0-9]{64}", expected_sha):
+            raise SplitPlanError("source_sha256 is required and must be a SHA-256 digest")
+        if expected_sha != source_sha256:
             raise SplitPlanError("source_sha256 does not match the source PDF")
         plan_hash = stable_digest(normalized)
         idempotency_key = stable_digest(
@@ -178,6 +183,10 @@ def execute_split_plan(source: Path | str, plan: dict[str, Any], output_dir: Pat
                 path = output_dir / artifact["pdf_path"]
                 if not path.is_file() or sha256_file(path) != artifact["pdf_sha256"]:
                     raise SplitPlanError("existing idempotent output failed integrity verification")
+                for preview in artifact.get("previews", []):
+                    preview_path = output_dir / preview["path"]
+                    if not preview_path.is_file() or sha256_file(preview_path) != preview["sha256"]:
+                        raise SplitPlanError("existing preview failed integrity verification")
             return {**existing, "idempotent_reuse": True}
         if output_dir.exists():
             raise SplitPlanError("refusing to replace a non-empty or unverified output directory")

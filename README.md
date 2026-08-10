@@ -48,7 +48,7 @@
 
 ## 当前状态
 
-`0.3.0` 在完整入职门、实战四流 skill 和脱敏 Base 参考实现之外，加入了可移植的回单切割工具。Agent 必须先视觉确认边界并提交切割计划，工具只执行、校验和生成证据清单；它不会自行认定回单边界，也不会直接写客户 Base。进入生产前仍需客户确认租户配置、字段映射和单文件验收结果。
+`0.4.0` 提供自包含的 Aily SkillHub 发布包：完整入职门、18 条规则覆盖矩阵、分类专业手册、脱敏 Base 参考实现、决策校验器和可移植回单切割工具。Agent 必须先视觉确认边界并提交切割计划，工具只执行、校验和生成证据清单；它不会自行认定回单边界，也不会直接写客户 Base。进入生产前仍需客户确认租户配置、字段映射和单文件验收结果。
 
 ## 回单切割工具
 
@@ -58,3 +58,14 @@ python3 scripts/receipt_split.py source.pdf plan.json output-directory
 ```
 
 计划格式见 `examples/receipt-split-plan.example.json`。坐标采用页面左上角为原点的归一化 `[x0, y0, x1, y1]`；一个页面可切出多张回单，一张回单也可由多个页面区域组成。成功输出包含派生 PDF、逐页 PNG 预览和 `receipt-split-manifest.json`。该清单是后续上传和受控写入的证据，不代表生产写入授权。
+
+## Aily SkillHub 发布包
+
+`skills/finance-four-flow-audit/` 已是自包含 Skill：包括主 `SKILL.md`、18 条规则覆盖矩阵、类型专册、受控写入规程、决策校验器和回单切割器。发布前运行：
+
+```bash
+python3 scripts/validate_aily_skill.py
+python3 scripts/package_aily_skill.py
+```
+
+生成物位于本地 `dist/`，不提交客户配置或运行产物。Aily 安装后仍须按 `references/installation-and-readiness.md` 对真实权限、沙箱依赖、群触发和单文件闭环逐项验收；成功读取 Skill 不等于生产能力已经部署。

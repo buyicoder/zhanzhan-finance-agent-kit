@@ -25,11 +25,16 @@ description: "让 Agent 代替死板分类器，独立把杂乱公司文件整�
 
 ## 按需读取参考规程
 
-- 处理六群新文件、财务重发纠错或任何专业事实的生产闭环前，必须完整读取 [references/type-specific-closure.md](references/type-specific-closure.md)。不得在只完成分类或单表填写后停止；合同、流水、回单、发票、履约和项目事实都要执行本类型规定的正向/反向搜索、逐候选原件硬门审查和多表级联。
+- 首次安装或版本升级时，读取 [references/rule-coverage.md](references/rule-coverage.md) 和 [references/installation-and-readiness.md](references/installation-and-readiness.md)，逐项证明能力，不得因读到规则就宣称工具可用。
+- 处理新文件、财务重发纠错或任何专业事实的生产闭环前，读取 [references/type-specific-closure.md](references/type-specific-closure.md)。不得在只完成分类或单表填写后停止。
 - 设计或执行全流程前，读取 [references/workflow.md](references/workflow.md)。
 - 新建或调整多维表格、字段、状态、视图和关联时，读取 [references/data-model.md](references/data-model.md)。
+- 建立文件索引或解析文件名/伴随文字时，读取 [references/file-index-and-mapping.md](references/file-index-and-mapping.md)。
+- 按文件类型分别读取：[合同](references/contracts.md)、[银行流水](references/bank-statements.md)、[回单与回单集合](references/receipts.md)、[发票与二维码](references/invoices-and-qr.md)、[货物流与履约](references/goods-flow.md)、[招投标](references/bidding.md)。
+- 处理项目、结算与审核时分别读取：[项目与汇总](references/project-and-summary.md)、[合同收付款审核](references/contract-payment-audit.md)、[四流一致审核](references/four-stream-audit.md)。
+- 判断公司身份时读取 [references/entity-identity.md](references/entity-identity.md)；调用工具时读取 [references/toolkit-boundaries.md](references/toolkit-boundaries.md)。
 - 确认合同、发票、回单、履约或流水关系前，读取 [references/review-and-matching.md](references/review-and-matching.md)。
-- 生产写入或声称完成前，读取 [references/quality-and-operations.md](references/quality-and-operations.md)。
+- 生产写入或声称完成前，读取 [references/controlled-write-closure.md](references/controlled-write-closure.md) 和 [references/quality-and-operations.md](references/quality-and-operations.md)。
 - 提取稳定事实、归并版本或判断跨文件关系前，读取 [references/stable-facts-and-relations.md](references/stable-facts-and-relations.md)。
 - 进行历史重扫、新文件模拟或 Agent 自主能力测试前，读取 [references/autonomous-evaluation.md](references/autonomous-evaluation.md)。
 
@@ -50,6 +55,7 @@ description: "让 Agent 代替死板分类器，独立把杂乱公司文件整�
 - 把派生对象作为具有来源血缘的正式证据对象处理。把一个文件内的多张回单切割为单笔回单，并保留父文件关联。
 - 按来源 Token、内容哈希、业务事实和文件版本去重。允许一文件多事实、多文件共同证明一事实；禁止把副本算成多份合同或多次履约。
 - 对每份文件输出结构化 decision manifest，并在写入前运行 `python3 scripts/validate_decision.py <manifest.json>`。
+- 回单集合先由 Agent 视觉确定边界，再运行 `python3 scripts/receipt_split.py <source.pdf> <plan.json> <output-dir>`；逐页核验输出预览后才能上传和登记派生文件。
 
 ### 三、建立专业集合
 

@@ -91,3 +91,27 @@ def test_invalid_bbox_and_changed_plan_fail_closed(tmp_path: Path):
     invalid["receipts"][0]["segments"][0]["bbox"] = [0, 0.8, 1, 0.2]
     with pytest.raises(SplitPlanError, match="out of range"):
         execute_split_plan(source, invalid, tmp_path / "invalid")
+
+
+def test_identity_fields_are_mandatory(tmp_path: Path):
+    source = make_source(tmp_path / "source.pdf")
+    missing_hash = plan_for(source)
+    missing_hash.pop("source_sha256")
+    with pytest.raises(SplitPlanError, match="source_sha256 is required"):
+        execute_split_plan(source, missing_hash, tmp_path / "missing-hash")
+
+    missing_parent = plan_for(source)
+    missing_parent["parent_object_id"] = ""
+    with pytest.raises(SplitPlanError, match="parent_object_id is required"):
+        execute_split_plan(source, missing_parent, tmp_path / "missing-parent")
+
+
+def test_idempotent_reuse_verifies_preview_integrity(tmp_path: Path):
+    source = make_source(tmp_path / "source.pdf")
+    plan = plan_for(source)
+    output = tmp_path / "out"
+    result = execute_split_plan(source, plan, output)
+    preview = output / result["artifacts"][0]["previews"][0]["path"]
+    preview.write_bytes(b"tampered")
+    with pytest.raises(SplitPlanError, match="preview failed integrity"):
+        execute_split_plan(source, plan, output)

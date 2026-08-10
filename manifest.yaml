@@ -1,5 +1,5 @@
 project: zhanzhan-finance-agent-kit
-version: 0.3.0
+version: 0.4.0
 language: zh-CN
 entrypoint: AGENT-ONBOARDING.md
 deployment_model: agent-guided

@@ -55,6 +55,10 @@ def main() -> None:
         ROOT / "tools" / "receipt_splitter.py",
         ROOT / "scripts" / "receipt_split.py",
         ROOT / "examples" / "receipt-split-plan.example.json",
+        ROOT / "scripts" / "validate_aily_skill.py",
+        ROOT / "scripts" / "package_aily_skill.py",
+        ROOT / "skills" / "finance-four-flow-audit" / "references" / "rule-coverage.md",
+        ROOT / "skills" / "finance-four-flow-audit" / "scripts" / "receipt_split.py",
     ]
     missing = [str(path.relative_to(ROOT)) for path in required_paths if not path.is_file()]
     if missing:
