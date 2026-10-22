@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhanzhan.example/schemas/tenant-config.schema.json",
+  "title": "Tenant configuration",
+  "type": "object",
+  "required": ["tenant_id", "sources", "data_model", "notifications"],
+  "properties": {
+    "tenant_id": {"type": "string", "minLength": 1},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "chat_id", "archive_folder_token", "enabled"],
+        "properties": {
+          "name": {"type": "string"},
+          "chat_id": {"type": "string", "pattern": "^oc_"},
+          "archive_folder_token": {"type": "string", "minLength": 1},
+          "enabled": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "data_model": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["standard", "adapt", "hybrid"]},
+        "base_token": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "notifications": {
+      "type": "object",
+      "required": ["completed", "needs_review", "failed"],
+      "properties": {
+        "completed": {"type": "array", "items": {"type": "string"}},
+        "needs_review": {"type": "array", "items": {"type": "string"}},
+        "failed": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "history_backfill": {"type": "boolean", "default": false}
+  },
+  "additionalProperties": false
+}
+
